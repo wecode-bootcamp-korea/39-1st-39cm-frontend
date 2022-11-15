@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+Nav {
+  display: flex;
+  width: 100vw;
+  z-index: 1;
+  position: sticky;
+  top: 0;
+
+  .navContent {
+    margin-top: 1rem;
+    padding: 0.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+
+    .Logo {
+      width: 7rem;
+    }
+
+    .navContentBox {
+      display: flex;
+      font-size: 0.8rem;
+      font-weight: 500;
+      align-items: center;
+      gap: 1rem;
+
+      img {
+        width: 0.8rem;
+        margin-right: 0.3rem;
+      }
+    }
+  }
+  .navCategoriesWrap {
+    display: flex;
+    padding: 0.5rem 4rem;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 800;
+
+    .navCategories {
+      display: flex;
+    }
+
+    ul {
+      gap: 1rem;
+
+      li {
+        font-size: 1.5rem;
+      }
+    }
+
+    .searchIcon {
+      width: 2rem;
+      margin-left: 57rem;
+    }
+  }
+}
+
+.navSearch {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  align-items: flex-end;
+  padding-right: 2rem;
+  background-color: hsl(0, 0%, 100% / 0.1);
+  backdrop-filter: blur(1rem);
+
+  .searchCloseBtn {
+    width: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .sideSearchBox {
+    align-items: center;
+
+    .inputContainer {
+      position: relative;
+      border-bottom: 0.5rem solid #000;
+      width: 40rem;
+      height: 4rem;
+
+      .navSearchInput {
+        outline: none;
+        border: none;
+        background-color: transparent;
+        font-size: 2rem;
+        font-weight: 500;
+      }
+
+      .searchIcon {
+        position: absolute;
+        right: 0;
+        height: 3rem;
+      }
+    }
+
+    .searchLank {
+      margin: 1rem 0 6rem;
+
+      .topTopic {
+        font-weight: 700;
+        font-size: 1.6rem;
+      }
+
+      .topKeyword {
+        li {
+          padding: 1.4rem 0 0;
+        }
+      }
+    }
+  }
+}
