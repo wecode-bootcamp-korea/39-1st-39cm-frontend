@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
+/* Top nav */
+
 Nav {
   display: flex;
   width: 100vw;
-  z-index: 1;
   position: sticky;
   top: 0;
 
@@ -30,6 +31,7 @@ Nav {
       }
     }
   }
+
   .navCategoriesWrap {
     display: flex;
     padding: 0.5rem 4rem;
@@ -56,8 +58,12 @@ Nav {
   }
 }
 
+/* Nav search tap */
+
 .navSearch {
   display: flex;
+  height: 100vh;
+  z-index: 2;
   flex-direction: column;
   align-content: space-between;
   align-items: flex-end;

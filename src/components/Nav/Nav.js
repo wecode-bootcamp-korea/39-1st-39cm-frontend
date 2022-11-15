@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Nav.scss";
 
 export default function Nav() {
+  const [showSearch, setShowSearch] = useState(false);
+
   return (
     <>
       <nav className="Nav">
@@ -57,37 +59,41 @@ export default function Nav() {
             class="searchIcon"
             src="/images/leedabin/search.png"
             alt="Search"
+            onClick={() => setShowSearch(true)}
           />
         </section>
       </nav>
-      <section className="navSearch">
-        <div className="navSearch">
-          <img
-            className="searchCloseBtn"
-            src="/images/leedabin/closeBtn.png"
-            alt="closeBtn"
-          />
-          <div className="sideSearchBox">
-            <div className="inputContainer">
-              <input className="navSearchInput" placeholder="Search" />
-              <img
-                className="searchIcon"
-                src="/images/leedabin/search.png"
-                alt="searchIcon"
-              />
-            </div>
-            <section className="searchLank">
-              <span className="topTopic">인기검색어</span>
-              <div className="topKeyword">
-                <ul>
-                  <li>니트</li>
-                  <li>프라이탁</li>
-                </ul>
+      {showSearch && (
+        <section className="navSearch">
+          <div className="navSearch">
+            <img
+              className="searchCloseBtn"
+              src="/images/leedabin/closeBtn.png"
+              alt="closeBtn"
+              onClick={() => setShowSearch(false)}
+            />
+            <div className="sideSearchBox">
+              <div className="inputContainer">
+                <input className="navSearchInput" placeholder="Search" />
+                <img
+                  className="searchIcon"
+                  src="/images/leedabin/search.png"
+                  alt="searchIcon"
+                />
               </div>
-            </section>
+              <section className="searchLank">
+                <span className="topTopic">인기검색어</span>
+                <div className="topKeyword">
+                  <ul>
+                    <li>니트</li>
+                    <li>프라이탁</li>
+                  </ul>
+                </div>
+              </section>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }
