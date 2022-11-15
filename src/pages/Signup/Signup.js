@@ -228,7 +228,7 @@ const Signup = () => {
               />
 
               <button className="Btn" type="submit" disabled={buttonActive}>
-                다음
+                회원정보 등록
               </button>
             </form>
           )}
