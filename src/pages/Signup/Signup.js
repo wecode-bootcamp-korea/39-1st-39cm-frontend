@@ -53,7 +53,6 @@ const Signup = () => {
       }
       //pw 길이 겁사
       if (7 < e.target.value.length && 21 > e.target.value.length) {
-        console.log(e.target.value.length);
         setPwValid((prev) => ({ ...prev, length: "check" }));
       } else {
         setPwValid((prev) => ({ ...prev, length: "non-check" }));
@@ -85,6 +84,7 @@ const Signup = () => {
       setSignupState(signupState + 1);
       setButtonActive(true);
     } else if (buttonActive === false && signupState === 2) {
+      console.log(account);
       //회원가입 확인
       fetch("http://127.0.0.1:3000/auth/signup", {
         method: "post",
@@ -131,7 +131,6 @@ const Signup = () => {
     });
   };
 
-  // console.log(account);
   return (
     <>
       <div className="signupWrap">
