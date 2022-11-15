@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Nav.scss";
+import { Link } from "react-router-dom";
 
 export default function Nav() {
   const [showSearch, setShowSearch] = useState(false);
@@ -8,43 +9,44 @@ export default function Nav() {
     <>
       <nav className="Nav">
         <section className="navContent">
-          <img
-            className="Logo"
-            src="/images/leedabin/BlackLogo.png"
-            alt="39cm logo"
-          />
+          <Link to={"/Main"}>
+            <img
+              className="Logo"
+              src="/images/leedabin/BlackLogo.png"
+              alt="39cm logo"
+            />
+          </Link>
+
           <div className="navContentBox">
             <div className="mypage">
-              <img
-                className="mypageIcon"
-                src="/images/leedabin/mypage.png"
-                alt="MY PAGE"
-              />
-              <span>MY PAGE</span>
-            </div>
-            <div className="mylike">
-              <img
-                className="heartIcon"
-                src="/images/leedabin/heart.png"
-                alt="MY LIKE"
-              />
-              <span>MY LIKE</span>
+              <Link to={"/MyPage"}>
+                <img
+                  className="mypageIcon"
+                  src="/images/leedabin/mypage.png"
+                  alt="MY PAGE"
+                />
+                <span>MY PAGE</span>
+              </Link>
             </div>
             <div className="shoppingBag">
-              <img
-                className="shoppingIcon"
-                src="/images/leedabin/shoppingbag.png"
-                alt="SHOPPING BAG"
-              />
-              <span>SHOPPING BAG</span>
+              <Link to={"/Cart"}>
+                <img
+                  className="shoppingIcon"
+                  src="/images/leedabin/shoppingbag.png"
+                  alt="SHOPPING BAG"
+                />
+                <span>SHOPPING BAG</span>
+              </Link>
             </div>
             <div className="login">
-              <img
-                className="loginIcon"
-                src="/images/leedabin/login.png"
-                alt="LOGIN"
-              />
-              <span>Login </span>
+              <Link to={"/Login"}>
+                <img
+                  className="loginIcon"
+                  src="/images/leedabin/login.png"
+                  alt="LOGIN"
+                />
+                <span>Login </span>
+              </Link>
             </div>
           </div>
         </section>
