@@ -16,7 +16,6 @@ export default function Nav() {
               alt="39cm logo"
             />
           </Link>
-
           <div className="navContentBox">
             <div className="mypage">
               <Link to={"/MyPage"}>
@@ -64,38 +63,38 @@ export default function Nav() {
             onClick={() => setShowSearch(true)}
           />
         </section>
-      </nav>
-      {showSearch && (
-        <section className="navSearch">
-          <div className="navSearch">
-            <img
-              className="searchCloseBtn"
-              src="/images/leedabin/closeBtn.png"
-              alt="closeBtn"
-              onClick={() => setShowSearch(false)}
-            />
-            <div className="sideSearchBox">
-              <div className="inputContainer">
-                <input className="navSearchInput" placeholder="Search" />
-                <img
-                  className="searchIcon"
-                  src="/images/leedabin/search.png"
-                  alt="searchIcon"
-                />
-              </div>
-              <section className="searchLank">
-                <span className="topTopic">인기검색어</span>
-                <div className="topKeyword">
-                  <ul>
-                    <li>니트</li>
-                    <li>프라이탁</li>
-                  </ul>
+        {showSearch && (
+          <section className="navSearch">
+            <div className="navSearch">
+              <img
+                className="searchCloseBtn"
+                src="/images/leedabin/closeBtn.png"
+                alt="closeBtn"
+                onClick={() => setShowSearch(false)}
+              />
+              <div className="sideSearchBox">
+                <div className="inputContainer">
+                  <input className="navSearchInput" placeholder="Search" />
+                  <img
+                    className="searchIcon"
+                    src="/images/leedabin/search.png"
+                    alt="searchIcon"
+                  />
                 </div>
-              </section>
+                <section className="searchLank">
+                  <span className="topTopic">인기검색어</span>
+                  <div className="topKeyword">
+                    <ul>
+                      <li>니트</li>
+                      <li>프라이탁</li>
+                    </ul>
+                  </div>
+                </section>
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        )}
+      </nav>
     </>
   );
 }

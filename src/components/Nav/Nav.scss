@@ -3,10 +3,10 @@
 /* Top nav */
 
 Nav {
-  display: flex;
+  display: fixed;
   width: 100vw;
-  position: sticky;
-  top: 0;
+  z-index: 1;
+  position: relative;
 
   .navContent {
     margin-top: 1rem;
@@ -61,15 +61,17 @@ Nav {
 /* Nav search tap */
 
 .navSearch {
+  position: absolute;
+  top: 0;
   display: flex;
   height: 100vh;
-  z-index: 2;
+  width: 100vw;
+  z-index: 11;
   flex-direction: column;
   align-content: space-between;
   align-items: flex-end;
   padding-right: 2rem;
-  background-color: hsl(0, 0%, 100% / 0.1);
-  backdrop-filter: blur(1rem);
+  background-color: white;
 
   .searchCloseBtn {
     width: 3rem;
