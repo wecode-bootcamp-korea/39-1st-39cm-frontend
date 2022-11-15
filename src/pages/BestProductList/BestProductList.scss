@@ -1,0 +1,25 @@
+.bestProductMain {
+  display: flex;
+  min-width: 900px;
+  padding: 40px 50px 90px;
+}
+
+.leftSide {
+  width: 200px;
+  padding-right: 80px;
+  box-sizing: content-box;
+}
+
+.leftCategories {
+  margin: 0px;
+  padding: 0px;
+}
+
+.title {
+  width: 200px;
+  padding-bottom: 12px;
+  border-bottom: 4px solid #000000;
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.25;
+}
