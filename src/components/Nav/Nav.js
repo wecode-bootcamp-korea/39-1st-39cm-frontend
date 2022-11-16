@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import "./Nav.scss";
 import { Link } from "react-router-dom";
+import DownNav from "./DownNav";
+import DownNavMen from "./DownNavMen";
+import DownNavUni from "./DownNavUni";
 
 export default function Nav() {
   const [showSearch, setShowSearch] = useState(false);
+  const [showHoverMenu, setShowHoverMenu] = useState(0);
 
   return (
     <>
       <nav className="Nav">
-        <section className="navContent">
-          <Link to={"/Main"}>
+        <section
+          className="navContent"
+          onMouseEnter={() => setShowHoverMenu(0)}
+        >
+          <Link className="unsetLink" to={"/Main"}>
             <img
               className="Logo"
               src="/images/leedabin/BlackLogo.png"
@@ -18,7 +25,7 @@ export default function Nav() {
           </Link>
           <div className="navContentBox">
             <div className="mypage">
-              <Link to={"/MyPage"}>
+              <Link className="unsetLink" to={"/MyPage"}>
                 <img
                   className="mypageIcon"
                   src="/images/leedabin/mypage.png"
@@ -28,7 +35,7 @@ export default function Nav() {
               </Link>
             </div>
             <div className="shoppingBag">
-              <Link to={"/Cart"}>
+              <Link className="unsetLink" to={"/Cart"}>
                 <img
                   className="shoppingIcon"
                   src="/images/leedabin/shoppingbag.png"
@@ -38,7 +45,7 @@ export default function Nav() {
               </Link>
             </div>
             <div className="login">
-              <Link to={"/Login"}>
+              <Link className="unsetLink" to={"/Login"}>
                 <img
                   className="loginIcon"
                   src="/images/leedabin/login.png"
@@ -51,10 +58,10 @@ export default function Nav() {
         </section>
         <section className="navCategoriesWrap">
           <ul className="navCategories">
-            <li>BEST</li>
-            <li>WOMEN</li>
-            <li>MEN</li>
-            <li>UNISEX</li>
+            <li onMouseEnter={() => setShowHoverMenu(0)}>BEST</li>
+            <li onMouseEnter={() => setShowHoverMenu(1)}>WOMEN</li>
+            <li onMouseEnter={() => setShowHoverMenu(2)}>MEN</li>
+            <li onMouseEnter={() => setShowHoverMenu(3)}>UNISEX</li>
           </ul>
           <img
             class="searchIcon"
@@ -67,10 +74,10 @@ export default function Nav() {
           <section className="navSearch">
             <div className="navSearch">
               <img
+                alt="closeBtn"
                 className="searchCloseBtn"
                 src="/images/leedabin/closeBtn.png"
-                alt="closeBtn"
-                onClick={() => setShowSearch(false)}
+                onClick={() => setShowSearch(0)}
               />
               <div className="sideSearchBox">
                 <div className="inputContainer">
@@ -82,7 +89,7 @@ export default function Nav() {
                   />
                 </div>
                 <section className="searchLank">
-                  <span className="topTopic">인기검색어</span>
+                  <span className="topTopic">추천검색어</span>
                   <div className="topKeyword">
                     <ul>
                       <li>니트</li>
@@ -93,6 +100,15 @@ export default function Nav() {
               </div>
             </div>
           </section>
+        )}
+        {showHoverMenu === 1 && (
+          <DownNav onMouseLeave={() => setShowHoverMenu(0)} />
+        )}
+        {showHoverMenu === 2 && (
+          <DownNavMen onMouseLeave={() => setShowHoverMenu(0)} />
+        )}
+        {showHoverMenu === 3 && (
+          <DownNavUni onMouseLeave={() => setShowHoverMenu(0)} />
         )}
       </nav>
     </>

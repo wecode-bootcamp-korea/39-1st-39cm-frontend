@@ -2,15 +2,30 @@
 
 /* Top nav */
 
+@keyframes fadeOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 Nav {
   display: fixed;
-  width: 100vw;
   z-index: 1;
   position: relative;
+  width: 100vw;
+  height: auto;
+  font-family: "Poppins", "Roboto", "Noto Sans KR", sans-serif;
+
+  .unsetLink {
+    text-decoration: none;
+    color: #323237;
+  }
 
   .navContent {
-    margin-top: 1rem;
-    padding: 0.5rem 4rem;
+    padding: 1rem 4rem;
     display: flex;
     justify-content: space-between;
 
@@ -38,6 +53,7 @@ Nav {
     align-items: center;
     justify-content: space-between;
     font-weight: 800;
+    border-bottom: 2px solid #f2f2f2;
 
     .navCategories {
       display: flex;
@@ -45,9 +61,16 @@ Nav {
 
     ul {
       gap: 1rem;
+      cursor: default;
 
       li {
         font-size: 1.5rem;
+        border: none;
+        border-bottom: 0.25rem solid transparent;
+
+        &:hover {
+          border-bottom: 0.25rem solid black;
+        }
       }
     }
 
@@ -70,8 +93,9 @@ Nav {
   flex-direction: column;
   align-content: space-between;
   align-items: flex-end;
-  padding-right: 2rem;
-  background-color: white;
+  padding: 4rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  animation: fadeOut 0.2s ease-in-out 0s normal forwards;
 
   .searchCloseBtn {
     width: 3rem;
@@ -114,6 +138,40 @@ Nav {
         li {
           padding: 1.4rem 0 0;
         }
+      }
+    }
+  }
+}
+
+/* Hover menu */
+
+.hoverMenu {
+  display: flex;
+  font-size: 1rem;
+  color: #323237;
+  animation: fadeOut 0.1s ease-in-out 0s normal forwards;
+  background-color: white;
+  border-bottom: 2px solid #f2f2f2;
+  height: 13rem;
+
+  .hovRow1 {
+    padding: 0.5rem 4rem;
+  }
+
+  .categories {
+    font-weight: 800;
+    font-size: 0.8rem;
+
+    .subcategory01 {
+      font-weight: 800;
+    }
+
+    li {
+      margin: 1rem 0;
+      font-weight: 400;
+
+      &:hover {
+        font-weight: 900;
       }
     }
   }
