@@ -1,30 +1,32 @@
 import React from "react";
 import "../BestProductList/BestProductList.scss";
+
 function BestProductList() {
   return (
     <div className="bestProduct">
       <div className="leftSide">
-        <div className="leftCategories"></div>
-        <h2 className="title">BEST</h2>
-        <ul className="leftSideList">
-          <ul className="categryNameList">
-            <li className="categryName">
-              <a className="firstName" href="#">
-                여성의류
-              </a>
-            </li>
-            <li className="categoryName">
-              <a className="secondeName" href="#">
-                남성의류
-              </a>
-            </li>
-            <li className="categoryName">
-              <a className="thirdName" href="#">
-                신발
-              </a>
-            </li>
+        <div className="leftCategories">
+          <h2 className="title">BEST</h2>
+          <ul className="leftSideList">
+            <ul className="categoryNameList">
+              <li className="categryName">
+                <a className="firstName" href="#">
+                  여성의류
+                </a>
+              </li>
+              <li className="categoryName">
+                <a className="secondName" href="#">
+                  남성의류
+                </a>
+              </li>
+              <li className="categoryName">
+                <a className="thirdName" href="#">
+                  신발
+                </a>
+              </li>
+            </ul>
           </ul>
-        </ul>
+        </div>
       </div>
       <div className="mainPage">
         <h2 className="kindOfThing">여성의류</h2>
