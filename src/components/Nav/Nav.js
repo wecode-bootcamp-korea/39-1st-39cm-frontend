@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import DownNav from "./DownNav";
 import DownNavMen from "./DownNavMen";
 import DownNavUni from "./DownNavUni";
+import KEYWORD_LIST from "./KeywordList";
 
 export default function Nav() {
   const [showSearch, setShowSearch] = useState(false);
@@ -91,9 +92,10 @@ export default function Nav() {
                 <section className="searchLank">
                   <span className="topTopic">추천검색어</span>
                   <div className="topKeyword">
-                    <ul>
-                      <li>니트</li>
-                      <li>프라이탁</li>
+                    <ul className="keywordList">
+                      {KEYWORD_LIST.map((el) => {
+                        return <li key={el.id}>{el.text}</li>;
+                      })}
                     </ul>
                   </div>
                 </section>
