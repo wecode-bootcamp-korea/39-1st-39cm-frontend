@@ -86,7 +86,7 @@ const Signup = () => {
     } else if (buttonActive === false && signupState === 2) {
       console.log(account);
       //회원가입 확인
-      fetch("http://127.0.0.1:3000/auth/signup", {
+      fetch("http://10.58.52.117:3000/auth/signup", {
         method: "post",
         headers: {
           "Content-Type": "application/json;charset=utf-8",

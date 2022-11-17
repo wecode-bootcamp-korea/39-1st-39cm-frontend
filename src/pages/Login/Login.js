@@ -7,7 +7,7 @@ const Login = () => {
   let gotoBestList = (e) => {
     e.preventDefault();
     //로그인 정보 확인
-    fetch("http://127.0.0.1:3000/auth/login", {
+    fetch("http://10.58.52.117:3000/auth/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
