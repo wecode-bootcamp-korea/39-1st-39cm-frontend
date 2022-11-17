@@ -1,9 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Cart/Cart.scss";
+import CartItem from "./CartItem";
 
 const Cart = () => {
-  const checkValue = (e) => console.log(e.target.checked);
+  const [cartItemList, setCartItemList] = useState();
+
+  useEffect(() => {
+    // mock data fetch
+    fetch("/data/shimdongseup/cartData.json", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCartItemList(data);
+      });
+    //   //backend API fetch
+    // fetch("http://127.0.0.1:3000/cart", {
+    //   method: "GET",
+    //   headers: {
+    //     authorization: localStorage.getItem("TOCKEN"),
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setCartItemList(data);
+    //   });
+  }, []);
+
+  // 총 주문 수량 계산
+  const calTotalAmount = (arr) => {
+    if (arr) {
+      let totalAmount = 0;
+      for (let i = 0; i < arr.length; i++) {
+        totalAmount = totalAmount + arr[i].amount;
+      }
+      return totalAmount;
+    }
+  };
+  // 총 주문 가격 계산
+  const calTotalPrice = (arr) => {
+    if (arr) {
+      let priceTotal = 0;
+      for (let i = 0; i < arr.length; i++) {
+        const price = arr[i].amount * arr[i].productPrice;
+        priceTotal = priceTotal + price;
+      }
+      return priceTotal;
+    }
+  };
+
+  const totalAmount = calTotalAmount(cartItemList);
+  const totalPrice = calTotalPrice(cartItemList);
 
   return (
     <div className="wrapCart">
@@ -15,46 +63,26 @@ const Cart = () => {
 
       <div className="itemList">
         <div className="columnName">
-          <input onClick={checkValue} className="checkBox" type="checkBox" />
+          {/* <input className="checkBox" type="checkBox" /> */}
           <div className="itemInfoCol">상품 정보</div>
           <div className="quantityCol">수량</div>
           <div className="orderPriceCol">주문금액</div>
           <div className="deliveryChargeCol">배송비</div>
         </div>
-        <div className="orderInfo">
-          <input className="checkBox" type="checkBox" />
-          <div className="itemInfo">
-            <img
-              src="./images/shimdongseup/product_img.jpg"
-              alt="product_img"
+        {cartItemList &&
+          cartItemList.map((obj, index) => (
+            <CartItem
+              itemInfo={obj}
+              key={index}
+              index={index}
+              //서버와 연결시 장바구니 삭제 api로 대체
+              deleteItem={function deleteComment() {
+                const deletedItem = [...cartItemList];
+                deletedItem.splice(index, 1);
+                setCartItemList(deletedItem);
+              }}
             />
-            <div className="wrapItemInfo">
-              <Link className="brandLink" to="#">
-                어나더오피스
-              </Link>
-              <Link className="itemLink" to="#">
-                22AW 2ND Goose Down Parka (색상)
-              </Link>
-              <div className="singlePrice">506,000원</div>
-              <div className="optionInfo">옵션 : [size]XL</div>
-            </div>
-            <span class="material-symbols-sharp delete">
-              disabled_by_default
-            </span>
-          </div>
-          <div className="quantity">
-            <button>-</button>
-            <div>1</div>
-            <button>+</button>
-          </div>
-          <div className="orderPrice">
-            <div>266,000원</div>
-            <Link className="goToPayment" to="#">
-              BUY NOW
-            </Link>
-          </div>
-          <div className="deliveryCharge">29CM 무료배송</div>
-        </div>
+          ))}
         <div className="itemListFooter">
           <button>선택상품 삭제</button>
           <span>장바구니는 접속 종료 후 60일 동안 보관됩니다.</span>
@@ -68,10 +96,13 @@ const Cart = () => {
         </div>
         <div className="calculation">
           <div className="totalPrice">
-            <div className="price">
-              480,700<h3>원</h3>
-            </div>
-            <span>총 1개</span>
+            {cartItemList && (
+              <div className="price">
+                {totalPrice.toLocaleString()}
+                <h3>원</h3>
+              </div>
+            )}
+            <span>총 {totalAmount}개</span>
           </div>
           <div className="wrapIcon">
             <div className="material-icons icon">add_circle</div>
@@ -85,9 +116,12 @@ const Cart = () => {
             <div className="material-icons icon">pause_circle_filled</div>
           </div>
           <div className="totalPrice">
-            <div className="price">
-              480.700<h3>원</h3>
-            </div>
+            {cartItemList && (
+              <div className="price">
+                {totalPrice.toLocaleString()}
+                <h3>원</h3>
+              </div>
+            )}
           </div>
         </div>
       </div>
