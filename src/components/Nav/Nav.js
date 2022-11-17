@@ -1,23 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Nav.scss";
 import { Link } from "react-router-dom";
-import DownNav from "./DownNav";
-import DownNavMen from "./DownNavMen";
-import DownNavUni from "./DownNavUni";
 import KEYWORD_LIST from "./KeywordList";
+import NavIconList from "./NavIconList";
+import DropDown from "./DropDown";
 
 export default function Nav() {
   const [showSearch, setShowSearch] = useState(false);
   const [showHoverMenu, setShowHoverMenu] = useState(0);
+  const [dropDownData, setDropDownData] = useState([]);
+
+  useEffect(() => {
+    fetch("/data/DropDownData.json")
+      .then((response) => response.json())
+      .then((result) => setDropDownData(result));
+  }, []);
 
   return (
     <>
-      <nav className="Nav">
+      <nav className="nav">
         <section
           className="navContent"
           onMouseEnter={() => setShowHoverMenu(0)}
         >
-          <Link className="unsetLink" to={"/Main"}>
+          <Link className="unsetLink" to={"/"}>
             <img
               className="Logo"
               src="/images/leedabin/BlackLogo.png"
@@ -25,36 +31,16 @@ export default function Nav() {
             />
           </Link>
           <div className="navContentBox">
-            <div className="mypage">
-              <Link className="unsetLink" to={"/MyPage"}>
-                <img
-                  className="mypageIcon"
-                  src="/images/leedabin/mypage.png"
-                  alt="MY PAGE"
-                />
-                <span>MY PAGE</span>
-              </Link>
-            </div>
-            <div className="shoppingBag">
-              <Link className="unsetLink" to={"/Cart"}>
-                <img
-                  className="shoppingIcon"
-                  src="/images/leedabin/shoppingbag.png"
-                  alt="SHOPPING BAG"
-                />
-                <span>SHOPPING BAG</span>
-              </Link>
-            </div>
-            <div className="login">
-              <Link className="unsetLink" to={"/Login"}>
-                <img
-                  className="loginIcon"
-                  src="/images/leedabin/login.png"
-                  alt="LOGIN"
-                />
-                <span>Login </span>
-              </Link>
-            </div>
+            {NavIconList.map((el) => {
+              return (
+                <div key={el.id}>
+                  <Link className="unsetLink" to={el.url}>
+                    <img src={el.img} />
+                    <span>{el.text}</span>
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </section>
         <section className="navCategoriesWrap">
@@ -103,15 +89,17 @@ export default function Nav() {
             </div>
           </section>
         )}
-        {showHoverMenu === 1 && (
-          <DownNav onMouseLeave={() => setShowHoverMenu(0)} />
-        )}
-        {showHoverMenu === 2 && (
-          <DownNavMen onMouseLeave={() => setShowHoverMenu(0)} />
-        )}
-        {showHoverMenu === 3 && (
-          <DownNavUni onMouseLeave={() => setShowHoverMenu(0)} />
-        )}
+        {dropDownData.map((obj, index) => {
+          if (obj.id === showHoverMenu) {
+            return (
+              <DropDown
+                obj={obj}
+                key={index}
+                mouseLeave={() => setShowHoverMenu(0)}
+              />
+            );
+          }
+        })}
       </nav>
     </>
   );

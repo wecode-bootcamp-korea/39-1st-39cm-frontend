@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
-/* Top nav */
-
 @keyframes fadeOut {
   from {
     opacity: 0;
@@ -11,33 +9,55 @@
   }
 }
 
-Nav {
+/*Font set*/
+$FontFace: "Campton-BoldDEMO", "Poppins", "Roboto", "Noto Sans KR", sans-serif;
+
+/*Color Set*/
+$greyColor: #f2f2f2;
+$darkGreyColor: #323237;
+$whiteBG: #fff;
+
+@mixin flex($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin fontSet($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin widHeight($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+/* Top nav */
+
+nav {
   display: fixed;
-  z-index: 1;
   position: relative;
-  width: 100vw;
-  height: auto;
-  font-family: "Poppins", "Roboto", "Noto Sans KRㅜ", sans-serif;
+  @include widHeight(100vw, auto);
+  z-index: 1;
+  font-family: $FontFace;
+  @include fontSet(0.5rem, 800);
 
   .unsetLink {
     text-decoration: none;
-    color: #323237;
+    color: $darkGreyColor;
   }
 
   .navContent {
     padding: 1rem 4rem;
-    display: flex;
-    justify-content: space-between;
-
-    .Logo {
-      width: 7rem;
-    }
+    align-content: center;
+    @include flex(space-between, center);
 
     .navContentBox {
       display: flex;
-      font-size: 0.8rem;
-      font-weight: 500;
-      align-items: center;
+      flex-direction: row;
+      @include fontSet(0.6rem, 700);
+      color: $darkGreyColor;
       gap: 1rem;
 
       img {
@@ -45,15 +65,18 @@ Nav {
         margin-right: 0.3rem;
       }
     }
+
+    .Logo {
+      width: 7rem;
+    }
   }
 
   .navCategoriesWrap {
-    display: flex;
+    @include flex(space-between, center);
+    height: 5rem;
     padding: 0.5rem 4rem;
-    align-items: center;
-    justify-content: space-between;
+    border-bottom: 2px solid $greyColor;
     font-weight: 800;
-    border-bottom: 2px solid #f2f2f2;
 
     .navCategories {
       display: flex;
@@ -84,17 +107,14 @@ Nav {
 /* Nav search tap */
 
 .navSearch {
+  @include flex(space-between, flex-end);
+  flex-direction: column;
   position: absolute;
   top: 0;
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  z-index: 11;
-  flex-direction: column;
-  align-content: space-between;
-  align-items: flex-end;
+  @include widHeight(100vw, 67vh);
   padding: 4rem;
   background-color: rgba(255, 255, 255, 0.8);
+  z-index: 11;
   animation: fadeOut 0.2s ease-in-out 0s normal forwards;
 
   .searchCloseBtn {
@@ -108,15 +128,13 @@ Nav {
     .inputContainer {
       position: relative;
       border-bottom: 0.5rem solid #000;
-      width: 40rem;
-      height: 4rem;
+      @include widHeight(40rem, 4rem);
 
       .navSearchInput {
         outline: none;
         border: none;
         background-color: transparent;
-        font-size: 2rem;
-        font-weight: 500;
+        @include fontSet(2rem, 500);
       }
 
       .searchIcon {
@@ -130,8 +148,7 @@ Nav {
       margin: 1rem 0 6rem;
 
       .topTopic {
-        font-weight: 700;
-        font-size: 1.6rem;
+        @include fontSet(1.6rem, 700);
       }
 
       .topKeyword {
@@ -145,33 +162,31 @@ Nav {
 
 /* Hover menu */
 
-.hoverMenu {
-  display: flex;
-  font-size: 1rem;
-  color: #323237;
-  animation: fadeOut 0.1s ease-in-out 0s normal forwards;
-  background-color: white;
-  border-bottom: 2px solid #f2f2f2;
+.dropDown {
   height: 13rem;
+  background-color: $whiteBG;
+  border-bottom: 2px solid $greyColor;
+  font-size: 1rem;
+  color: $darkGreyColor;
+  animation: fadeOut 0.1s ease-in-out 0s normal forwards;
 
-  .hovRow1 {
+  .dropDownRow {
     padding: 0.5rem 4rem;
-  }
 
-  .categories {
-    font-weight: 800;
-    font-size: 0.8rem;
+    .dropDownCategories {
+      @include fontSet(1rem, 800);
 
-    .subcategory01 {
-      font-weight: 800;
-    }
+      .category {
+        font-weight: 800;
+      }
 
-    li {
-      margin: 1rem 0;
-      font-weight: 400;
+      li {
+        margin: 1rem 0;
+        font-weight: 400;
 
-      &:hover {
-        font-weight: 900;
+        &:hover {
+          font-weight: 900;
+        }
       }
     }
   }
