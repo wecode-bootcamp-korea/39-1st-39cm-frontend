@@ -74,12 +74,31 @@ const Cart = () => {
             <CartItem
               itemInfo={obj}
               key={index}
-              index={index}
-              //서버와 연결시 장바구니 삭제 api로 대체
+              setCartItemList={setCartItemList}
+              cartItemList={cartItemList}
               deleteItem={function deleteComment() {
+                // 백엔드 연결전 코드
                 const deletedItem = [...cartItemList];
                 deletedItem.splice(index, 1);
                 setCartItemList(deletedItem);
+                // //백앤드 연결시 아래코드로 대체
+                // fetch(`http://127.0.0.1:3000/cart/:${obj.basketId}`, {
+                //   method: "DELETE",
+                //   headers: { authorization: localStorage.getItem("TOKEN") },
+                // })
+                //   .then((response) => {
+                //     if (response.status !== 204) {
+                //       throw new Error("error");
+                //     } else {
+                //       //fetch 성공시
+                //       const deletedItem = [...cartItemList];
+                //       deletedItem.splice(index, 1);
+                //       setCartItemList(deletedItem);
+                //     }
+                //   })
+                //   .catch((error) => {
+                //     alert("장바구니 삭제에 실패하였습니다.");
+                //   });
               }}
             />
           ))}
@@ -129,7 +148,7 @@ const Cart = () => {
         <Link className="continueShopping" to="#">
           CONTINUE SHOPPING
         </Link>
-        <Link className="checkout" to="#">
+        <Link className="checkout" to="/Payment">
           CHECK OUT
         </Link>
       </div>

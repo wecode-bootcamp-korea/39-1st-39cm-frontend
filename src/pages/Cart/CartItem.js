@@ -1,22 +1,97 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const CartItem = ({ itemInfo, index, deleteItem }) => {
-  const { productName, productPrice, image_url, brand_name, basketId, amount } =
-    itemInfo;
-  const [quantity, setQuantity] = useState(amount);
-  const totalPrice = productPrice * quantity;
-  // const totalPrice = productPrice * amount; //백엔드 연결시 교체
+const CartItem = ({ itemInfo, cartItemList, setCartItemList, deleteItem }) => {
+  const {
+    productId,
+    productName,
+    productPrice,
+    image_url,
+    brand_name,
+    basketId,
+    amount,
+  } = itemInfo;
 
-  //백엔드 연결전 수량버튼제어
-  const plusQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-  const subQuantity = () => {
-    setQuantity(quantity - 1);
+  const totalPrice = productPrice * amount;
+
+  // 수량 제어 버튼
+  const plusAmount = () => {
+    // 처음 fetch 받아온 리스트에서 수량을 수정
+    const changedCartList = cartItemList.map((item) => {
+      if (productId === item.productId) {
+        item.amount = amount + 1;
+      }
+      return item;
+    });
+    setCartItemList(changedCartList);
+
+    // //백앤드 서버에 수량을 수정
+    // fetch("http://127.0.0.1:3000/cart", {
+    //   method: "PATCH",
+    //   headers: {
+    //     authorization: localStorage.getItem("TOCKEN"),
+    //   },
+    //   body: JSON.stringify({
+    //     basketId: basketId,
+    //     amout: amount + 1,
+    //   }),
+    // })
+    //   .then((response) => {
+    //     if (response.status !== 200) {
+    //       throw new Error("error");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     alert("수량 변경에 실패하였습니다.");
+    //     //서버 수량 수정 실패시 프론트단의 수량을 원레대로 돌리기
+    //     const changedCartList = cartItemList.map((item) => {
+    //       if (productId === item.productId) {
+    //         item.amount = amount;
+    //       }
+    //       return item;
+    //     });
+    //     setCartItemList(changedCartList);
+    //   });
   };
 
-  //백엔드 연결 시 수량제어 버튼 구현하기
+  const subAmount = () => {
+    // 처음 fetch 받아온 리스트에서 수량을 수정
+    const changedCartList = cartItemList.map((item) => {
+      if (productId === item.productId) {
+        item.amount = amount - 1;
+      }
+      return item;
+    });
+    setCartItemList(changedCartList);
+
+    // //백앤드 연결 시
+    // fetch("http://127.0.0.1:3000/cart", {
+    //   method: "PATCH",
+    //   headers: {
+    //     authorization: localStorage.getItem("TOCKEN"),
+    //   },
+    //   body: JSON.stringify({
+    //     basketId: basketId,
+    //     amout: amount,
+    //   }),
+    // })
+    //   .then((response) => {
+    //     if (response.status !== 200) {
+    //       throw new Error("error");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     alert("수량 변경에 실패하였습니다.");
+    //     //서버 수량 수정 실패시 프론트단의 수량을 원레대로 돌리기
+    //     const changedCartList = cartItemList.map((item) => {
+    //       if (productId === item.productId) {
+    //         item.amount = amount;
+    //       }
+    //       return item;
+    //     });
+    //     setCartItemList(changedCartList);
+    //   });
+  };
 
   return (
     <div className="orderInfo">
@@ -39,10 +114,9 @@ const CartItem = ({ itemInfo, index, deleteItem }) => {
         </span>
       </div>
       <div className="quantity">
-        <button onClick={subQuantity}>-</button>
-        <div>{quantity}</div>
-        {/* <div>{amount}</div>백엔드 연결시 교체  */}
-        <button onClick={plusQuantity}>+</button>
+        <button onClick={subAmount}>-</button>
+        <div>{amount}</div>
+        <button onClick={plusAmount}>+</button>
       </div>
       <div className="orderPrice">
         <div>{totalPrice.toLocaleString()}원</div>

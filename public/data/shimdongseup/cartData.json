@@ -1,5 +1,6 @@
 [
   {
+    "productId": 1,
     "productName": "22FW NIKE KARHEART COL SHOOSE",
     "productPrice": 220000,
     "image_url": "./images/shimdongseup/product_img_1.jpg",
@@ -8,6 +9,7 @@
     "amount": 1
   },
   {
+    "productId": 2,
     "productName": "21SS Newbalance White SHOOSE",
     "productPrice": 180000,
     "image_url": "./images/shimdongseup/product_img_2.jpg",
@@ -16,6 +18,7 @@
     "amount": 2
   },
   {
+    "productId": 3,
     "productName": "21SS pajama set",
     "productPrice": 80000,
     "image_url": "./images/shimdongseup/product_img_3.jpg",
@@ -24,6 +27,7 @@
     "amount": 1
   },
   {
+    "productId": 4,
     "productName": "22FW balenciaga jacket",
     "productPrice": 1100000,
     "image_url": "./images/shimdongseup/product_img_4.jpg",
