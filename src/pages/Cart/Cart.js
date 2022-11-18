@@ -82,7 +82,7 @@ const Cart = () => {
                 deletedItem.splice(index, 1);
                 setCartItemList(deletedItem);
                 // //백앤드 연결시 아래코드로 대체
-                // fetch(`http://127.0.0.1:3000/cart/:${obj.basketId}`, {
+                // fetch(`http://127.0.0.1:3000/cart/${obj.basketId}`, {
                 //   method: "DELETE",
                 //   headers: { authorization: localStorage.getItem("TOKEN") },
                 // })

@@ -99,10 +99,10 @@ const CartItem = ({ itemInfo, cartItemList, setCartItemList, deleteItem }) => {
       <div className="itemInfo">
         <img src={image_url} alt="product_img" />
         <div className="wrapItemInfo">
-          <Link className="brandLink" to="#">
+          <Link className="brandLink" to={`/ProdectDetail/${productId}`}>
             {brand_name}
           </Link>
-          <Link className="itemLink" to="#">
+          <Link className="itemLink" to={`/ProdectDetail/${productId}`}>
             {productName}
           </Link>
           <div className="singlePrice">{productPrice.toLocaleString()}원</div>
