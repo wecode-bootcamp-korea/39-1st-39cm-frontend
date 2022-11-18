@@ -137,12 +137,6 @@ button {
   overflow: visible;
   height: 46px;
   margin-left: 50px;
-
-  label {
-    padding-left: 0px;
-    font-size: 14px;
-    margin: 0px 24px;
-  }
 }
 
 .kind {
@@ -179,6 +173,11 @@ button {
 .productListBottom {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  margin-top: 36px;
-  grid-gap: 40px 20px;
+  margin-top: 40px;
+  grid-gap: 0px 10px;
+
+  li {
+    grid-column: auto/span 3;
+    border-bottom: 0;
+  }
 }

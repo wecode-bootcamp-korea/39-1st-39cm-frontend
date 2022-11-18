@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Product/BestProductTop.scss";
 
-function BestProductTop() {
+function BestProductTop(props) {
+  const { productName } = props.product;
   return (
     <li className="product">
       <div className="ware">

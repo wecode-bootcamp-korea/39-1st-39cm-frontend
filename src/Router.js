@@ -7,7 +7,7 @@ import BestProductList from "./pages/BestProductList/BestProductList";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Cart from "./pages/Cart/Cart";
 import MyPage from "./pages/MyPage/MyPage";
-import Payment from "./pages/Signup/Payment/Payment";
+import Payment from "./pages/Payment/Payment";
 
 const Router = () => {
   return (

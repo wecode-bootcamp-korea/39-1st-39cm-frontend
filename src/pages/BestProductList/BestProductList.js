@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../BestProductList/BestProductList.scss";
 import BestProductBottom from "./Product/BestProductBottom";
 import BestProductTop from "./Product/BestProductTop";
 
 function BestProductList() {
+  const [bestProduct, setBestProduct] = useState([]);
+  const [bestProductTop, setBestProductTop] = useState([]);
+  useEffect(() => {
+    fetch("/data/bestProductList.json")
+      .then((response) => response.json())
+      .then((result) => setBestProduct(result));
+    console.log(bestProduct);
+  }, []);
+  useEffect(() => {
+    fetch("/data/bestProductTopList.json")
+      .then((response) => response.json())
+      .then((result) => setBestProductTop(result));
+    console.log(bestProduct);
+  }, []);
   return (
     <div className="bestProduct">
       <div className="leftSide">
@@ -84,28 +98,34 @@ function BestProductList() {
           </ul>
         </div>
         <ul className="productList">
+          {bestProductTop.map((product) => (
+            <BestProductTop key={product.id} product={product} />
+          ))}
+          {/* <BestProductTop />
           <BestProductTop />
-          <BestProductTop />
-          <BestProductTop />
+          <BestProductTop /> */}
         </ul>
         <ul className="productListBottom">
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
-          <BestProductBottom />
+          {bestProduct.map((product) => (
+            <BestProductBottom key={product.id} product={product} />
+          ))}
+          {/* // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom />
+          // <BestProductBottom /> */}
         </ul>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function BestProductBottom() {
+function BestProductBottom(props) {
+  const { productName } = props.product;
   return (
     <li className="product">
       <div className="ware">
@@ -16,7 +17,7 @@ function BestProductBottom() {
           </Link>
           <Link to="/ProductDetail" title="제품이름" className="wareName">
             <div className="wareShowing">
-              <h5 className="wareExplanation">제품이름_black</h5>
+              <h5 className="wareExplanation">{productName}</h5>
               <div className="price">
                 <strong className="discountPrice">460,750</strong>
               </div>
