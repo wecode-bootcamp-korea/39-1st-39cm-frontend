@@ -11,7 +11,7 @@ export default function Nav() {
   const [dropDownData, setDropDownData] = useState([]);
 
   useEffect(() => {
-    fetch("./DropDownData.json")
+    fetch("data/DropDownData.json")
       .then((response) => response.json())
       .then((result) => setDropDownData(result));
   }, []);
