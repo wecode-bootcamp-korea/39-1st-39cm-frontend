@@ -11,7 +11,7 @@ export default function Nav() {
   const [dropDownData, setDropDownData] = useState([]);
 
   useEffect(() => {
-    fetch("/data/DropDownData.json")
+    fetch("./DropDownData.json")
       .then((response) => response.json())
       .then((result) => setDropDownData(result));
   }, []);
@@ -32,15 +32,37 @@ export default function Nav() {
           </Link>
           <div className="navContentBox">
             {NavIconList.map((el) => {
-              return (
-                <div key={el.id}>
-                  <Link className="unsetLink" to={el.url}>
-                    <img src={el.img} />
-                    <span>{el.text}</span>
-                  </Link>
-                </div>
-              );
+              if (el.id !== 3) {
+                return (
+                  <div key={el.id}>
+                    <Link className="unsetLink" to={el.url}>
+                      <img src={el.img} alt="icon-img" />
+                      <span>{el.text}</span>
+                    </Link>
+                  </div>
+                );
+              }
             })}
+            {localStorage.getItem("TOKEN") && (
+              <div>
+                <Link
+                  className="unsetLink"
+                  to={"/Login"}
+                  onClick={() => localStorage.removeItem("TOKEN")}
+                >
+                  <img src="/images/leedabin/logout.png" alt="icon-img" />
+                  <span>LOGOUT</span>
+                </Link>
+              </div>
+            )}
+            {!localStorage.getItem("TOKEN") && (
+              <div>
+                <Link className="unsetLink" to={"/login"}>
+                  <img src="/images/leedabin/login.png" alt="icon-img" />
+                  <span>LOGIN</span>
+                </Link>
+              </div>
+            )}
           </div>
         </section>
         <section className="navCategoriesWrap">
@@ -51,7 +73,7 @@ export default function Nav() {
             <li onMouseEnter={() => setShowHoverMenu(3)}>UNISEX</li>
           </ul>
           <img
-            class="searchIcon"
+            className="searchIcon"
             src="/images/leedabin/search.png"
             alt="Search"
             onClick={() => setShowSearch(true)}
@@ -64,7 +86,7 @@ export default function Nav() {
                 alt="closeBtn"
                 className="searchCloseBtn"
                 src="/images/leedabin/closeBtn.png"
-                onClick={() => setShowSearch(0)}
+                onClick={() => setShowSearch(false)}
               />
               <div className="sideSearchBox">
                 <div className="inputContainer">
