@@ -1,5 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../BestProductList/BestProductList.scss";
+import BestProductBottom from "./Product/BestProductBottom";
+import BestProductTop from "./Product/BestProductTop";
 
 function BestProductList() {
   return (
@@ -10,19 +13,19 @@ function BestProductList() {
           <ul className="leftSideList">
             <ul className="categoryNameList">
               <li className="categryName">
-                <a className="firstName" href="#">
+                <Link className="firstName" to="#">
                   여성의류
-                </a>
+                </Link>
               </li>
               <li className="categoryName">
-                <a className="secondName" href="#">
+                <Link className="secondName" to="#">
                   남성의류
-                </a>
+                </Link>
               </li>
               <li className="categoryName">
-                <a className="thirdName" href="#">
+                <Link className="thirdName" to="#">
                   신발
-                </a>
+                </Link>
               </li>
             </ul>
           </ul>
@@ -81,52 +84,28 @@ function BestProductList() {
           </ul>
         </div>
         <ul className="productList">
-          <li className="product">
-            <div className="ware">
-              <a href="#" title="제품정보" className="productInfo">
-                <div className="wareInfo">
-                  <img src="/images/kimdongki/woman.jpg" alt="woman" />
-                </div>
-              </a>
-              <div className="productExplanation">
-                <a href="#" title="브랜드" className="brand">
-                  브랜드
-                </a>
-                <a href="#" title="제품이름" className="wareName">
-                  <div className="wareShowing">
-                    <h5 className="wareExplanation">제품이름_black</h5>
-                    <div className="price">
-                      <strong className="beforeDiscount">485,000</strong>
-                      <div className="discount">
-                        <span className="percent">5 %</span>
-                        <strong className="discountPrice">460,750</strong>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                <div className="like">
-                  <button className="heart">
-                    <img
-                      src="/images/kimdongki/heart.svg"
-                      width={16}
-                      height={16}
-                      viewBox="0 0 18 18"
-                    ></img>
-                    9,184
-                  </button>
-                  <a href="#" className="comment">
-                    <img
-                      src="/images/kimdongki/comment.svg"
-                      width={16}
-                      height={16}
-                      viewBox="0 0 15 16"
-                    ></img>
-                    <span className="review">644</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
+          <BestProductTop />
+          <BestProductTop />
+          <BestProductTop />
+        </ul>
+        <ul className="productListBottom">
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
+          <BestProductBottom />
         </ul>
       </div>
     </div>
