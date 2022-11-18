@@ -7,7 +7,8 @@ const Login = () => {
   let gotoBestList = (e) => {
     e.preventDefault();
     //로그인 정보 확인
-    fetch("http://10.58.52.117:3000/auth/login", {
+    console.log(account);
+    fetch("http://10.58.52.150:3000/auth/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -29,6 +30,7 @@ const Login = () => {
         )
       )
       .then((data) => {
+        console.log(data);
         localStorage.setItem("TOKEN", data.token);
         navigate("/BestProductList");
       });
