@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+@font-face {
+  font-family: "Campton";
+  src: local("Campton"), url("/styles/font/Campton-BoldDEMO.otf") format("otf");
+}
+
+/* variable set */
+$FontFace: "Campton", "Poppins", "Roboto", "Noto Sans KR", sans-serif;
+$greyColor: #f2f2f2;
+$deepGreyColor: #d4d4d4;
+$darkGreyColor: #323237;
+
+/* mixin set */
+
+@mixin unsetDefault {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+@mixin flex($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin fontSet($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin widHeight($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+/* prouctDetail SCSS */
+
+.productDetail {
+  font-family: $FontFace;
+  @include flex(none, center);
+  @include widHeight(100vw, auto);
+  flex-direction: column;
+  position: relative;
+
+  .productDetailContainer {
+    @include flex(none, center);
+
+    .thumbnailContainer {
+      display: flex;
+      @include widHeight(60rem, 25rem);
+
+      .productThumbnail {
+        @include widHeight(30rem, inherit);
+        overflow: hidden;
+
+        .nbThn1 {
+          @include widHeight(100%, auto);
+        }
+
+        .arrowsSet {
+          @include flex(space-around, center);
+          position: absolute;
+          border: 1px solid white;
+          align-content: center;
+
+          .arrowLeft {
+            width: 1rem;
+            align-items: center;
+            background-color: white;
+          }
+
+          .arrowRight {
+            width: 1rem;
+            align-items: center;
+            background-color: white;
+          }
+        }
+      }
+    }
+  }
+  .productDetailBox {
+    @include widHeight(40rem, 25rem);
+    display: flex;
+    flex-direction: column;
+    border-top: 4px solid black;
+    margin-left: 2rem;
+
+    .pdNameHeart {
+      width: 35rem;
+      display: inline-flex;
+      justify-content: space-between;
+
+      .pdLeftBox {
+        @include widHeight(40rem, 5rem);
+        padding: 1rem 0;
+
+        h1 {
+          font-family: $FontFace;
+          @include fontSet(1.2rem, 600);
+          line-height: 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .score {
+          font-family: $FontFace;
+          @include fontSet(0.8rem, 500);
+        }
+
+        .reviewSeeMore {
+          padding: 1rem 0;
+          font-family: $FontFace;
+          @include fontSet(0.8rem, 500);
+          color: grey;
+        }
+      }
+
+      .pdRightBox {
+        @include flex(center, center);
+        padding: 1rem;
+        border-left: 0.3px solid grey;
+
+        .heartLineIcon {
+          width: 3rem;
+          padding: 0 0.5rem;
+        }
+      }
+    }
+    .price {
+      padding: 1rem 0;
+      @include fontSet(2rem, 600);
+
+      span {
+        font-size: 1.1rem;
+      }
+    }
+
+    .colorSelect {
+      margin: 1rem 0;
+      padding: 1rem 0;
+      @include fontSet(1rem, 600);
+
+      input {
+        @include unsetDefault;
+      }
+    }
+  }
+  .orderBtns {
+    margin-top: 4.5rem;
+    @include flex(space-between, flex-end);
+
+    .addCartBtn {
+      background-color: white;
+      border: 1px solid $deepGreyColor;
+      padding: 1rem;
+      width: 17.5rem;
+    }
+
+    .buyNowBtn {
+      color: white;
+      background-color: black;
+      border: 1px solid black;
+      padding: 1rem;
+      width: 17.5rem;
+      box-shadow: 6px;
+    }
+  }
+}
+
+.details {
+  padding-top: 6rem;
+  @include widHeight(60rem, auto);
+
+  .detailsInfo {
+    width: inherit;
+    height: auto;
+  }
+
+  .detailsInfo2 {
+    width: inherit;
+    height: auto;
+  }
+}
+
+.reviewContainer {
+  @include widHeight(60rem, 25rem);
+
+  .reviewInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4rem;
+    width: 60rem;
+    height: 2.2rem;
+    border-bottom: 4px solid black;
+
+    .reviewCount {
+      @include fontSet(1.5rem, 600);
+    }
+
+    .start {
+      width: 1rem;
+    }
+
+    .reviewRule {
+      padding: 0.3rem 0.4rem;
+      @include fontSet(0.8rem, 300);
+      border: 1px solid $greyColor;
+      @include widHeight(10rem, 20rem);
+    }
+
+    .divide {
+      margin: 1rem;
+      display: inline;
+      border-right: 1px solid black;
+    }
+
+    .writeReview {
+      @include fontSet(0.8rem, 300);
+      border-bottom: 1px solid black;
+    }
+  }
+}
