@@ -52,6 +52,7 @@ $darkGreyColor: #323237;
       @include widHeight(60rem, 25rem);
 
       .productThumbnail {
+        position: relative;
         @include widHeight(30rem, inherit);
         overflow: hidden;
 
@@ -60,10 +61,15 @@ $darkGreyColor: #323237;
         }
 
         .arrowsSet {
-          @include flex(space-around, center);
+          @include flex(space-between, center);
+          left: 0;
+          width: 100%;
+          padding: 0 10px;
           position: absolute;
-          border: 1px solid white;
+          top: 50%;
+          z-index: 1;
           align-content: center;
+          transform: translateY(-50%);
 
           .arrowLeft {
             width: 1rem;
