@@ -8,27 +8,18 @@ const ProductDetail = () => {
         <div className="thumbnailContainer">
           <div className="productThumbnail">
             <div className="arrowsSet">
-              <img
-                className="arrowLeft"
-                src="/images/leedabin/arrowLeft.png"
-                alt="arrowLeft"
-              />
-              <img
-                className="arrowRight"
-                src="/images/leedabin/arrowRight.png"
-                alt="arrowright"
-              />
+              <button className="arrowLeft">
+                <img src="/images/leedabin/arrowLeft.png" alt="arrowLeft" />
+              </button>
+              <button className="arrowRight">
+                <img src="/images/leedabin/arrowRight.png" alt="arrowright" />
+              </button>
             </div>
             <img
               className="nbThn1"
               src="/images/leedabin/NB_yellow_set.jpeg"
               alt="thumbnail"
             />
-            <div className="thumbnailNav"></div>
-            <div className="thumbnailNav"></div>
-            <div className="thumbnailNav"></div>
-            <div className="thumbnailNav"></div>
-            <div className="thumbnailNav"></div>
           </div>
           <section className="productDetailBox">
             <div className="pdNameHeart">
@@ -49,14 +40,38 @@ const ProductDetail = () => {
               297,000
               <span>원</span>
             </h2>
-            <div className="colorSelect">
-              <input type="text" placeholder="Color"></input>{" "}
-              <ul>
-                <li>Khaki Grey</li>
-                <li>Black</li>
-                <li>Navy</li>
-              </ul>
-            </div>
+            <section class="ColorWrapper" data-role="selectbox">
+              <h2 className="hidden"></h2>
+              <section className="selectbox">
+                <h2 className="hidden"></h2>
+                <button type="button" className="toggleBtn">
+                  Color
+                  <img
+                    src="/images/leedabin/arrowRight.png"
+                    alt="downArrow"
+                    className="ico-down"
+                  />
+                </button>
+                <ul className="selectBoxOption hide">
+                  <li>
+                    <button type="button" className="optionBtn">
+                      Khaki Grey
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" className="optionBtn">
+                      Black
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" className="optionBtn">
+                      Navy
+                    </button>
+                  </li>
+                </ul>
+              </section>
+            </section>
+            {/* </div> */}
             <div className="orderBtns">
               <button className="addCartBtn" type="button">
                 장바구니 담기
@@ -121,7 +136,6 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
-
       <section className="reviewBox"></section>
     </section>
   );
