@@ -83,12 +83,34 @@ const ProductDetail = () => {
       <section className="reviewContainer">
         <div className="reviewInfo">
           <div className="reviewTopLeftBox">
-            <span className="reviewCount">리뷰(203)</span>
-            <img
-              className="start"
-              src="/images/leedabin/startOrange.png"
-              alt="start"
-            />
+            <span className="reviewCount">
+              리뷰(203)
+              <img
+                className="start"
+                src="/images/leedabin/startOrange.png"
+                alt="start"
+              />
+              <img
+                className="start"
+                src="/images/leedabin/startOrange.png"
+                alt="start"
+              />
+              <img
+                className="start"
+                src="/images/leedabin/startOrange.png"
+                alt="start"
+              />
+              <img
+                className="start"
+                src="/images/leedabin/startOrange.png"
+                alt="start"
+              />
+              <img
+                className="start"
+                src="/images/leedabin/startOrange.png"
+                alt="start"
+              />
+            </span>
           </div>
           <div className="reviewTopRightBox">
             <span className="reviewRule">

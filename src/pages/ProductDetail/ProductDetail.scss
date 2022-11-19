@@ -146,6 +146,7 @@ $darkGreyColor: #323237;
       }
     }
   }
+
   .orderBtns {
     margin-top: 4.5rem;
     @include flex(space-between, flex-end);
@@ -163,7 +164,8 @@ $darkGreyColor: #323237;
       border: 1px solid black;
       padding: 1rem;
       width: 17.5rem;
-      box-shadow: 6px;
+      -webkit-box-shadow: 9px 12px 18px -1px rgba(0, 0, 0, 0.35);
+      box-shadow: 9px 12px 18px -1px rgba(0, 0, 0, 0.35);
     }
   }
 }
