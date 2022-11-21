@@ -1,9 +1,39 @@
 import React from "react";
 import "./ProductDetail.scss";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
+  const [showColorOpt, setShowColorOpt] = useState(false);
+
+  const hendleScrollUp = (e) => {
+    if (!window.scrollY) return;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleScrollDown = (e) => {
+    if (window.scrollY) return;
+
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="productDetail">
+      <div className="topToEndContainer">
+        <button className="toTop" onClick={hendleScrollUp}>
+          <img src="/images/leedabin/arrowUpSmall.png" alt="toTop" />
+        </button>
+        <button className="toEnd" onClick={handleScrollDown}>
+          <img src="/images/leedabin/arrowDownSmall.png" alt="toEnd" />
+        </button>
+      </div>
       <div className="productDetailContainer">
         <div className="thumbnailContainer">
           <div className="productThumbnail">
@@ -15,18 +45,54 @@ const ProductDetail = () => {
                 <img src="/images/leedabin/arrowRight.png" alt="arrowright" />
               </button>
             </div>
-            <img
-              className="nbThn1"
-              src="/images/leedabin/NB_yellow_set.jpeg"
-              alt="thumbnail"
-            />
+            <div className="flexBox">
+              <img
+                className="nbThn1"
+                src="/images/leedabin/NB_yellow_set.jpeg"
+                alt="thumbnail"
+              />
+              <img
+                className="nbThn1"
+                src="/images/leedabin/NB_yellow_set_twogirls.jpeg"
+                alt="thumbnail2"
+              />
+              <img className="nbThn1" src="/" alt="thumbnail3" />
+            </div>
           </div>
           <section className="productDetailBox">
             <div className="pdNameHeart">
               <div className="pdLeftBox">
                 <h1>뉴발란스 숏다운 (3color)</h1>
-                <span className="score">별별별</span>
-                <span className="reviewSeeMore"> N개 리뷰 보기</span>
+                <span className="score">
+                  <span className="starts">
+                    <img
+                      className="start"
+                      src="/images/leedabin/startOrange.png"
+                      alt="start"
+                    />
+                    <img
+                      className="start"
+                      src="/images/leedabin/startOrange.png"
+                      alt="start"
+                    />
+                    <img
+                      className="start"
+                      src="/images/leedabin/startOrange.png"
+                      alt="start"
+                    />
+                    <img
+                      className="start"
+                      src="/images/leedabin/startOrange.png"
+                      alt="start"
+                    />
+                    <img
+                      className="start"
+                      src="/images/leedabin/startOrange.png"
+                      alt="start"
+                    />
+                  </span>
+                  <span className="reviewSeeMore"> N개 리뷰 보기</span>
+                </span>
               </div>
               <div className="pdRightBox">
                 <img
@@ -40,45 +106,55 @@ const ProductDetail = () => {
               297,000
               <span>원</span>
             </h2>
-            <section class="ColorWrapper" data-role="selectbox">
-              <h2 className="hidden"></h2>
-              <section className="selectbox">
-                <h2 className="hidden"></h2>
-                <button type="button" className="toggleBtn">
-                  Color
+            <section className="ColorWrapper" data-role="selectbox">
+              <section className="selectBox">
+                <button
+                  type="button"
+                  className="toggleBtn"
+                  onClick={() => setShowColorOpt(true)}
+                >
+                  COLOR
                   <img
-                    src="/images/leedabin/arrowRight.png"
+                    src="/images/leedabin/dropDown.png"
                     alt="downArrow"
                     className="ico-down"
                   />
                 </button>
-                <ul className="selectBoxOption hide">
-                  <li>
-                    <button type="button" className="optionBtn">
-                      Khaki Grey
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" className="optionBtn">
-                      Black
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" className="optionBtn">
-                      Navy
-                    </button>
-                  </li>
-                </ul>
+                {showColorOpt && (
+                  <ul
+                    className="selectBoxOption"
+                    onClick={() => setShowColorOpt(false)}
+                  >
+                    <li>
+                      <button type="button" className="optionBtn">
+                        Khaki Grey
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" className="optionBtn">
+                        Black
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" className="optionBtn">
+                        Navy
+                      </button>
+                    </li>
+                  </ul>
+                )}
               </section>
             </section>
-            {/* </div> */}
             <div className="orderBtns">
-              <button className="addCartBtn" type="button">
-                장바구니 담기
-              </button>
-              <button className="buyNowBtn" type="button">
-                바로 구매하기
-              </button>
+              <Link to={"/Cart"}>
+                <button className="addCartBtn" type="button">
+                  장바구니 담기
+                </button>
+              </Link>
+              <Link to={"/Payment"}>
+                <button className="buyNowBtn" type="button">
+                  바로 구매하기
+                </button>
+              </Link>
             </div>
           </section>
         </div>
@@ -135,8 +211,16 @@ const ProductDetail = () => {
             <span className="writeReview">리뷰쓰기</span>
           </div>
         </div>
+        <section className="reviewBox">
+          <div className="reviewPhoto">
+            <img src="/images/leedabin/NB_yellow_set.jpeg" alt="reviewPhoto" />
+          </div>
+        </section>
+        <div className="reviewCtx">
+          <h3 className="reviewTitle">@Kim123</h3>
+          <span className="ctx">랄라루</span>
+        </div>
       </section>
-      <section className="reviewBox"></section>
     </section>
   );
 };

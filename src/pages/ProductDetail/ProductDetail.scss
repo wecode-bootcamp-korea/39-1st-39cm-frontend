@@ -10,9 +10,10 @@ $FontFace: "Campton", "Poppins", "Roboto", "Noto Sans KR", sans-serif;
 $greyColor: #f2f2f2;
 $deepGreyColor: #d4d4d4;
 $darkGreyColor: #323237;
+$borderLine: 4px solid black;
+$borderThinBlack: 1px solid black;
 
 /* mixin set */
-
 @mixin unsetDefault {
   border: none;
   background-color: transparent;
@@ -42,7 +43,37 @@ $darkGreyColor: #323237;
   @include flex(none, center);
   @include widHeight(100vw, auto);
   flex-direction: column;
-  position: relative;
+
+  .topToEndContainer {
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+    position: fixed;
+    bottom: 10%;
+    right: 3%;
+
+    button {
+      @include widHeight(2rem, 2rem);
+      @include flex(center, center);
+      appearance: unset;
+      border: none;
+      background-color: black;
+      color: white;
+
+      &:first-child {
+        border-radius: 50% 50% 0 0;
+      }
+
+      &:nth-child(2) {
+        border-radius: 0 0 50% 50%;
+      }
+
+      img {
+        width: 60%;
+        justify-content: center;
+      }
+    }
+  }
 
   .productDetailContainer {
     @include flex(none, center);
@@ -57,7 +88,7 @@ $darkGreyColor: #323237;
         overflow: hidden;
 
         .nbThn1 {
-          @include widHeight(100%, auto);
+          @include widHeight(none, auto);
         }
 
         .arrowsSet {
@@ -95,17 +126,28 @@ $darkGreyColor: #323237;
           }
         }
       }
+
+      .flexBox {
+        display: flex;
+
+        img {
+          @include widHeight(30rem, 25rem);
+          object-fit: contain;
+          flex: none;
+        }
+      }
     }
   }
+
   .productDetailBox {
-    @include widHeight(40rem, 25rem);
+    @include widHeight(35rem, 25rem);
     display: flex;
     flex-direction: column;
-    border-top: 4px solid black;
+    border-top: $borderLine;
     margin-left: 2rem;
 
     .pdNameHeart {
-      width: 35rem;
+      width: inherit;
       display: inline-flex;
       justify-content: space-between;
 
@@ -123,6 +165,10 @@ $darkGreyColor: #323237;
         .score {
           font-family: $FontFace;
           @include fontSet(0.8rem, 500);
+
+          img {
+            width: 0.9rem;
+          }
         }
 
         .reviewSeeMore {
@@ -144,6 +190,7 @@ $darkGreyColor: #323237;
         }
       }
     }
+
     .price {
       padding: 1rem 0;
       @include fontSet(2rem, 600);
@@ -154,50 +201,44 @@ $darkGreyColor: #323237;
     }
 
     .ColorWrapper {
-      width: 40rem;
-      margin: 1rem 0;
+      width: 35rem;
+      height: auto;
       padding: 1rem 0;
       border: 3px solid $greyColor;
 
       .toggleBtn {
+        display: flex;
         font-weight: 600;
-        width: 40rem;
-        height: 2rem;
-        appearance: none;
         border: none;
-        background-color: white;
-        margin: -1px;
-
-        &:toggle {
-          background-color: #323237;
-        }
+        background-color: transparent;
+        justify-content: space-between;
+        padding: 0 1rem;
+        width: 34rem;
+        align-content: center;
 
         img {
-          height: 1.2rem;
-        }
-
-        li:hover {
-          font-weight: 600;
-          width: 40rem;
-          height: 2rem;
-          appearance: none;
-          border: none;
-          background-color: white;
-          margin: -1px;
+          width: 1.2rem;
+          margin-left: 1rem;
         }
       }
+    }
+  }
 
-      .selectBoxOption {
-        background-color: red;
-        width: inherit;
-      }
+  .selectBoxOption {
+    button {
+      font-weight: 600;
+      @include widHeight(35rem, 2rem);
+      appearance: unset;
+      border: none;
+      background-color: transparent;
     }
   }
 }
 
 .orderBtns {
-  margin-top: 4.5rem;
-  @include flex(space-between, flex-end);
+  width: inherit;
+  justify-content: space-between;
+  margin-top: 3rem;
 
   .addCartBtn {
     background-color: white;
@@ -207,13 +248,18 @@ $darkGreyColor: #323237;
   }
 
   .buyNowBtn {
+    width: 17.5rem;
     color: white;
     background-color: black;
-    border: 1px solid black;
+    border: $borderThinBlack;
     padding: 1rem;
-    width: 17.5rem;
     -webkit-box-shadow: 9px 12px 18px -1px rgba(0, 0, 0, 0.35);
     box-shadow: 9px 12px 18px -1px rgba(0, 0, 0, 0.35);
+
+    &:hover {
+      background-color: orangered;
+      border: 1px solid orangered;
+    }
   }
 }
 
@@ -222,26 +268,23 @@ $darkGreyColor: #323237;
   @include widHeight(60rem, auto);
 
   .detailsInfo {
-    width: inherit;
-    height: auto;
+    @include widHeight(inherit, auto);
   }
 
   .detailsInfo2 {
-    width: inherit;
-    height: auto;
+    @include widHeight(inherit, auto);
   }
 }
 
 .reviewContainer {
-  @include widHeight(60rem, 25rem);
+  @include widHeight(60rem, none);
 
   .reviewInfo {
     display: flex;
     justify-content: space-between;
     margin-top: 4rem;
-    width: 60rem;
-    height: 2.2rem;
-    border-bottom: 4px solid black;
+    @include widHeight(60rem, 2.2rem);
+    border-bottom: $borderLine;
 
     .reviewCount {
       @include fontSet(1.5rem, 600);
@@ -261,12 +304,31 @@ $darkGreyColor: #323237;
     .divide {
       margin: 1rem;
       display: inline;
-      border-right: 1px solid black;
+      border-right: $borderThinBlack;
     }
 
     .writeReview {
       @include fontSet(0.8rem, 300);
-      border-bottom: 1px solid black;
+      border-bottom: $borderThinBlack;
     }
+  }
+
+  .reviewBox {
+    width: inherit;
+    height: 50rem;
+    overflow: hidden;
+    background-color: aquamarine;
+
+    img {
+      width: 100%;
+      height: 50%;
+    }
+  }
+  .reviewCtx {
+    width: auto;
+    height: auto;
+    line-height: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: $borderLine;
   }
 }
