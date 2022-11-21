@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const CartItem = ({ itemInfo, cartItemList, setCartItemList, deleteItem }) => {
+const CartItem = ({
+  itemInfo,
+  cartItemList,
+  setCartItemList,
+  deleteItem,
+  index,
+}) => {
   const {
     productId,
     productName,
@@ -11,6 +17,7 @@ const CartItem = ({ itemInfo, cartItemList, setCartItemList, deleteItem }) => {
     basketId,
     amount,
   } = itemInfo;
+  const [isCheckItem, setIsCheckItem] = useState(true);
 
   const totalPrice = productPrice * amount;
 
@@ -93,9 +100,31 @@ const CartItem = ({ itemInfo, cartItemList, setCartItemList, deleteItem }) => {
     //   });
   };
 
+  const checkItem = () => {
+    if (isCheckItem === true) {
+      setIsCheckItem(false);
+      const newObj = { ...itemInfo, isCheck: !isCheckItem };
+      let newArr = cartItemList;
+      newArr[index] = newObj;
+      setCartItemList(newArr);
+    } else {
+      setIsCheckItem(true);
+
+      const newObj = { ...itemInfo, isCheck: !isCheckItem };
+      let newArr = cartItemList;
+      newArr[index] = newObj;
+      setCartItemList(newArr);
+    }
+  };
+
   return (
     <div className="orderInfo">
-      {/* <input className="checkBox" type="checkBox" /> */}
+      <input
+        onChange={checkItem}
+        checked={isCheckItem}
+        className="checkBox"
+        type="checkBox"
+      />
       <div className="itemInfo">
         <img src={image_url} alt="product_img" />
         <div className="wrapItemInfo">
@@ -108,7 +137,6 @@ const CartItem = ({ itemInfo, cartItemList, setCartItemList, deleteItem }) => {
           <div className="singlePrice">{productPrice.toLocaleString()}원</div>
           <div className="optionInfo">옵션 : [size]XL</div>
         </div>
-        {/* 서버와 연결시 장바구니 삭제 api로 대체 */}
         <span onClick={deleteItem} className="material-symbols-sharp delete">
           disabled_by_default
         </span>

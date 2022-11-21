@@ -6,12 +6,24 @@ import CartItem from "./CartItem";
 const Cart = () => {
   const [cartItemList, setCartItemList] = useState();
 
+  const setPaymentItem = () => {
+    const paymentItem = cartItemList.filter((obj) => {
+      return obj.isCheck === true;
+    });
+    localStorage.setItem("orderList", JSON.stringify(paymentItem));
+    return paymentItem;
+  };
+
   useEffect(() => {
     // mock data fetch
     fetch("/data/shimdongseup/cartData.json")
       .then((res) => res.json())
       .then((data) => {
-        setCartItemList(data);
+        // isCheck 항목 추가해서 리스트 저장
+        const newCartList = data.map((obj) => {
+          return { ...obj, isCheck: true };
+        });
+        setCartItemList(newCartList);
       });
     //   //backend API fetch
     // fetch("http://127.0.0.1:3000/cart", {
@@ -31,7 +43,9 @@ const Cart = () => {
     if (arr) {
       let totalAmount = 0;
       arr.forEach((obj) => {
-        totalAmount += obj.amount;
+        if (obj.isCheck) {
+          totalAmount += obj.amount;
+        }
       });
       return totalAmount;
     }
@@ -41,12 +55,15 @@ const Cart = () => {
     if (arr) {
       let priceTotal = 0;
       arr.forEach((obj) => {
-        priceTotal += obj.amount * obj.productPrice;
+        if (obj.isCheck) {
+          priceTotal += obj.amount * obj.productPrice;
+        }
       });
       return priceTotal;
     }
   };
 
+  // console.log(cartItemList);
   const totalAmount = calTotalAmount(cartItemList);
   const totalPrice = calTotalPrice(cartItemList);
 
@@ -73,6 +90,7 @@ const Cart = () => {
               key={index}
               setCartItemList={setCartItemList}
               cartItemList={cartItemList}
+              index={index}
               deleteItem={function deleteComment() {
                 // 백엔드 연결전 코드
                 const deletedItem = [...cartItemList];
@@ -112,12 +130,10 @@ const Cart = () => {
         </div>
         <div className="calculation">
           <div className="totalPrice">
-            {cartItemList && (
-              <div className="price">
-                {totalPrice.toLocaleString()}
-                <h3>원</h3>
-              </div>
-            )}
+            <div className="price">
+              {totalPrice?.toLocaleString()}
+              <h3>원</h3>
+            </div>
             <span>총 {totalAmount}개</span>
           </div>
           <div className="wrapIcon">
@@ -132,12 +148,10 @@ const Cart = () => {
             <div className="material-icons icon">pause_circle_filled</div>
           </div>
           <div className="totalPrice">
-            {cartItemList && (
-              <div className="price">
-                {totalPrice.toLocaleString()}
-                <h3>원</h3>
-              </div>
-            )}
+            <div className="price">
+              {totalPrice?.toLocaleString()}
+              <h3>원</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -145,7 +159,7 @@ const Cart = () => {
         <Link className="continueShopping" to="#">
           CONTINUE SHOPPING
         </Link>
-        <Link className="checkout" to="/Payment">
+        <Link onClick={setPaymentItem} className="checkout" to="/Payment">
           CHECK OUT
         </Link>
       </div>
