@@ -80,15 +80,22 @@ $borderThinBlack: 1px solid black;
 
     .thumbnailContainer {
       display: flex;
-      @include widHeight(60rem, 25rem);
+      @include widHeight(62rem, 25rem);
+      justify-content: space-between;
 
       .productThumbnail {
+        @include widHeight(400px, 400px);
         position: relative;
-        @include widHeight(30rem, inherit);
         overflow: hidden;
 
-        .nbThn1 {
-          @include widHeight(none, auto);
+        .flexBox {
+          display: flex;
+
+          img {
+            @include widHeight(400px, 400px);
+            object-fit: contain;
+            flex: none;
+          }
         }
 
         .arrowsSet {
@@ -126,17 +133,12 @@ $borderThinBlack: 1px solid black;
           }
         }
       }
-
-      .flexBox {
-        display: flex;
-
-        img {
-          @include widHeight(30rem, 25rem);
-          object-fit: contain;
-          flex: none;
-        }
-      }
     }
+  }
+
+  .space {
+    width: 2rem;
+    height: 2rem;
   }
 
   .productDetailBox {
@@ -144,7 +146,6 @@ $borderThinBlack: 1px solid black;
     display: flex;
     flex-direction: column;
     border-top: $borderLine;
-    margin-left: 2rem;
 
     .pdNameHeart {
       width: inherit;
@@ -200,7 +201,7 @@ $borderThinBlack: 1px solid black;
       }
     }
 
-    .ColorWrapper {
+    .colorWrapper {
       width: 35rem;
       height: auto;
       padding: 1rem 0;
@@ -231,6 +232,49 @@ $borderThinBlack: 1px solid black;
       appearance: unset;
       border: none;
       background-color: transparent;
+    }
+  }
+
+  .itemSelectContainer {
+    width: 35rem;
+
+    .itemOptBox {
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 2px solid black;
+      margin: 1rem 0 1.4rem;
+      align-items: center;
+      padding-bottom: 1rem;
+
+      button {
+        font-weight: 600;
+        @include widHeight(2rem, 2rem);
+        appearance: unset;
+        border: 0.7px solid $deepGreyColor;
+        margin: 0;
+        background-color: transparent;
+      }
+    }
+    .itemOptAll {
+      font-weight: 600;
+    }
+
+    .itemOptBottom {
+      justify-content: flex-end;
+      align-items: center;
+      display: flex;
+      gap: 1rem;
+
+      .finalPriceWon {
+        font-weight: 800;
+        font-size: 1.6rem;
+        color: orangered;
+      }
+
+      .finalPriceKor {
+        font-weight: 400;
+        font-size: 0.8rem;
+      }
     }
   }
 }
@@ -264,8 +308,8 @@ $borderThinBlack: 1px solid black;
 }
 
 .details {
-  padding-top: 6rem;
-  @include widHeight(60rem, auto);
+  padding-top: 11rem;
+  @include widHeight(62rem, auto);
 
   .detailsInfo {
     @include widHeight(inherit, auto);
@@ -277,13 +321,14 @@ $borderThinBlack: 1px solid black;
 }
 
 .reviewContainer {
-  @include widHeight(60rem, none);
+  @include widHeight(62rem, none);
+  margin-bottom: 10rem;
 
   .reviewInfo {
     display: flex;
     justify-content: space-between;
     margin-top: 4rem;
-    @include widHeight(60rem, 2.2rem);
+    @include widHeight(62rem, 2.2rem);
     border-bottom: $borderLine;
 
     .reviewCount {
@@ -317,7 +362,6 @@ $borderThinBlack: 1px solid black;
     width: inherit;
     height: 50rem;
     overflow: hidden;
-    background-color: aquamarine;
 
     img {
       width: 100%;
