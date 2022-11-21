@@ -1,0 +1,155 @@
+@import "../../styles/mixin.scss";
+@keyframes smoothAppear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide {
+  from {
+    transform: translateX(5%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.signupWrap {
+  @include flex(center, auto);
+  margin-top: 270px;
+  .signupBox {
+    @include flex(auto, center);
+    width: 400px;
+    flex-direction: column;
+    .signupText {
+      position: relative;
+      width: 400px;
+      margin-bottom: 38px;
+      font-size: 44px;
+      text-align: center;
+      font-weight: 600;
+    } //loginText
+
+    Form {
+      position: relative;
+      width: 100%;
+      padding-top: 20px;
+      border-top: 4px solid rgb(244, 244, 244);
+      animation: slide 0.5s ease-in-out 0s 1 normal forwards;
+      &::after {
+        position: absolute;
+        display: block;
+        width: 33%;
+        height: 4px;
+        animation: smoothAppear 1s ease-in-out 0s 1 normal forwards;
+        content: "";
+        top: -4px;
+        background-color: #000;
+      }
+      .idGuide {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 28px;
+      }
+      input {
+        display: block;
+        width: 100%;
+        height: 48px;
+        margin-bottom: 7px;
+        padding: 0 14px;
+        color: #1a1a1a;
+        border: 1px solid #d4d4d4;
+        outline: none;
+        border-radius: 2px;
+        font-weight: 500;
+        &:focus {
+          outline: 1px solid #000;
+        }
+      }
+      .genderSelector {
+        display: flex;
+        .genderBox {
+          @include flex(auto, center);
+          margin-right: 20px;
+          input {
+            width: 20px;
+            outline: none;
+          }
+        }
+      }
+
+      span {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 5px;
+        padding-right: 28px;
+        color: #375fff;
+        font-size: 12px;
+        line-height: 20px;
+        &::after {
+          position: absolute;
+          display: block;
+          width: 10px;
+          height: 6px;
+          border-bottom: 1px solid #375fff;
+          border-left: 1px solid #375fff;
+          top: 3px;
+          right: 10px;
+          transform: rotate(-45deg);
+          content: "";
+          box-sizing: content-box;
+        }
+      }
+      .non-check {
+        color: #c4c4c4;
+        &::after {
+          border-color: #c4c4c4;
+        }
+      }
+
+      .signupAlert {
+        height: 20px;
+        margin-top: 10px;
+        color: rgb(255, 72, 0);
+        font-size: 13px;
+        line-height: 20px;
+      }
+      .Btn {
+        width: 100%;
+        min-width: 40px;
+        height: 48px;
+        min-height: 25px;
+        margin: 10px 0 0;
+        color: #fff;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        background-color: #375fff;
+        border-radius: 2px;
+        line-height: 48px;
+        font-weight: 600;
+        &:disabled {
+          background-color: #c4c4c4;
+        }
+      }
+      .pwBtn {
+        margin-top: 0;
+      }
+    } //idform
+    .idForm {
+    }
+    .pwForm {
+      &::after {
+        width: 66%;
+      }
+    }
+    .userInfoForm {
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
