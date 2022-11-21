@@ -1,0 +1,102 @@
+/*전체 적용부분*/
+
+.myTit {
+  position: relative;
+  padding-bottom: 10px;
+  border-bottom: 4px solid #000;
+  font-size: 22px;
+  color: #000;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+/*my page 시작*/
+
+.myPage {
+  display: flex;
+  position: relative;
+  min-width: 900px;
+  max-width: 1500px;
+  margin: 40px auto 0;
+  padding: 0 50px 100px;
+
+  .myPageLeft {
+    box-sizing: border-box;
+    width: 230px;
+    padding: 0 50px 0 0;
+
+    .myName {
+      margin-bottom: 38px;
+
+      h3 {
+        font-size: 40px;
+        font-weight: 700;
+        color: #000;
+        word-break: break-all;
+      }
+
+      ul {
+        margin-top: 27px;
+        font-size: 14px;
+
+        li {
+          padding: 4px 0 5px;
+
+          .txt {
+            font-size: 15px;
+            font-weight: 600;
+            color: #303033;
+          }
+
+          em {
+            font-weight: 700;
+            font-style: normal;
+          }
+        }
+      }
+    }
+  }
+
+  .main {
+    -webkit-box-flex: 1;
+    flex: 1;
+
+    .myOrder {
+      overflow: hidden;
+      position: relative;
+
+      h3 {
+        padding-bottom: 10px;
+        font-weight: 600;
+        font-size: 23px;
+        line-height: 30px;
+      }
+
+      .myOrderInserted {
+        .myOrderTit {
+          div {
+            height: 30px;
+            border-bottom: 1px solid #303033;
+            font-weight: 700;
+            font-size: 13px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

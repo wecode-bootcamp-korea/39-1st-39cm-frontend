@@ -29,12 +29,6 @@ image {
   vertical-align: top;
 }
 
-Link {
-  text-size-adjust: none;
-  text-decoration: none;
-  outline: none;
-}
-
 div {
   display: block;
 }
@@ -162,7 +156,7 @@ button {
   cursor: pointer;
 }
 
-.productList {
+.productListTop {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   margin-top: 36px;

@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "../BestProductList/BestProductList.scss";
 import BestProductBottom from "./Product/BestProductBottom";
 import BestProductTop from "./Product/BestProductTop";
 
 function BestProductList() {
-  const [bestProduct, setBestProduct] = useState([]);
-  const [bestProductTop, setBestProductTop] = useState([]);
+  //bestProductTop,Bottom
+  // const [bestProductTop, setBestProductTop] = useState([]);
+  const [bestProductBottom, setBestProductBottom] = useState([]);
+  const [titleHandler, setTitleHandler] = useState(0);
+  const titleName = titleData[titleHandler];
+
+  // useEffect(() => {
+  //   fetch("/data/kimdongki/bestProductTopList.json")
+  //     .then((response) => response.json())
+  //     .then((result) => setBestProductTop(result));
+  // }, []);
   useEffect(() => {
-    fetch("/data/bestProductList.json")
+    fetch("/data/kimdongki/bestProductBottomList.json")
       .then((response) => response.json())
-      .then((result) => setBestProduct(result));
-    console.log(bestProduct);
+      .then((result) => setBestProductBottom(result));
   }, []);
-  useEffect(() => {
-    fetch("/data/bestProductTopList.json")
-      .then((response) => response.json())
-      .then((result) => setBestProductTop(result));
-    console.log(bestProduct);
-  }, []);
+
   return (
     <div className="bestProduct">
       <div className="leftSide">
@@ -26,27 +28,23 @@ function BestProductList() {
           <h2 className="title">BEST</h2>
           <ul className="leftSideList">
             <ul className="categoryNameList">
-              <li className="categryName">
-                <Link className="firstName" to="#">
-                  여성의류
-                </Link>
-              </li>
-              <li className="categoryName">
-                <Link className="secondName" to="#">
-                  남성의류
-                </Link>
-              </li>
-              <li className="categoryName">
-                <Link className="thirdName" to="#">
-                  신발
-                </Link>
-              </li>
+              {titleData.map((data) => (
+                <li className="categoryName">
+                  <button
+                    key={data.id}
+                    className="firstName"
+                    onClick={() => setTitleHandler(data.id)}
+                  >
+                    {data.title}
+                  </button>
+                </li>
+              ))}
             </ul>
           </ul>
         </div>
       </div>
       <div className="mainPage">
-        <h2 className="kindOfThing">여성의류</h2>
+        <h2 className="kindOfThing">{titleName.title}</h2>
         <div className="categories">
           <ul className="categoriesList">
             <span className="list">
@@ -62,7 +60,7 @@ function BestProductList() {
                 for="categoryMediumList"
                 title="categoryMediumList"
               >
-                전체
+                {titleName.category1}
               </label>
             </span>
             <span className="list">
@@ -77,7 +75,7 @@ function BestProductList() {
                 for="secondCategoryMediumList"
                 title="categoryMediumList"
               >
-                상의
+                {titleName.category2}
               </label>
             </span>
             <span className="list">
@@ -92,44 +90,52 @@ function BestProductList() {
                 for="thirdCategoryMediumList"
                 title="categoryMediumList"
               >
-                하의
+                {titleName.category3}
               </label>
             </span>
           </ul>
         </div>
-        <ul className="productList">
-          {bestProductTop.map((product) => (
-            <BestProductTop key={product.id} product={product} />
-          ))}
-          {/* <BestProductTop />
-          <BestProductTop />
-          <BestProductTop /> */}
+        <ul className="productListTop">
+          {bestProductBottom &&
+            bestProductBottom.map((obj, index) => {
+              if (index < 3) {
+                return <BestProductTop key={index} product={obj} />;
+              }
+            })}
         </ul>
         <ul className="productListBottom">
-          {bestProduct.map((product) => (
-            <BestProductBottom key={product.id} product={product} />
-          ))}
-          {/* // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom />
-          // <BestProductBottom /> */}
+          {bestProductBottom &&
+            bestProductBottom.map((product, index) => {
+              if (index > 2) {
+                return <BestProductBottom key={index} product={product} />;
+              }
+            })}
         </ul>
       </div>
     </div>
   );
 }
+
+const titleData = [
+  {
+    id: 0,
+    title: "여성의류",
+    category1: "전체",
+    category2: "상의",
+    category3: "하의",
+  },
+  {
+    id: 1,
+    title: "남성의류",
+    category1: "전체",
+    category2: "상의",
+    category3: "하의",
+  },
+  {
+    id: 2,
+    title: "신발",
+    category1: "전체",
+  },
+];
 
 export default BestProductList;
