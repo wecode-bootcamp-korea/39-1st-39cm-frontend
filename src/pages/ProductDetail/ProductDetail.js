@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
   const [showColorOpt, setShowColorOpt] = useState(false);
+  const [likePd, setLikePd] = useState(false);
 
   const hendleScrollUp = (e) => {
     if (!window.scrollY) return;
@@ -52,11 +53,15 @@ const ProductDetail = () => {
                 alt="thumbnail"
               />
               <img
-                className="nbThn1"
+                className="nbThn2"
                 src="/images/leedabin/NB_yellow_set_twogirls.jpeg"
                 alt="thumbnail2"
               />
-              <img className="nbThn1" src="/" alt="thumbnail3" />
+              <img
+                className="nbThn3"
+                src="/images/leedabin/NB_yellow_sitting.jpeg"
+                alt="thumbnail3"
+              />
             </div>
           </div>
           <section className="productDetailBox">
@@ -97,8 +102,15 @@ const ProductDetail = () => {
               <div className="pdRightBox">
                 <img
                   className="heartLineIcon"
-                  src="/images/leedabin/heartLine.png"
                   alt="heart"
+                  onClick={() => {
+                    setLikePd(!likePd);
+                  }}
+                  src={
+                    likePd === false
+                      ? "/images/leedabin/heartLine.png"
+                      : "/images/leedabin/heartOrange.png"
+                  }
                 />
               </div>
             </div>
@@ -111,7 +123,7 @@ const ProductDetail = () => {
                 <button
                   type="button"
                   className="toggleBtn"
-                  onClick={() => setShowColorOpt(true)}
+                  onClick={() => setShowColorOpt(!showColorOpt)}
                 >
                   COLOR
                   <img
