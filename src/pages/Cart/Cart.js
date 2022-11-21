@@ -8,9 +8,7 @@ const Cart = () => {
 
   useEffect(() => {
     // mock data fetch
-    fetch("/data/shimdongseup/cartData.json", {
-      method: "GET",
-    })
+    fetch("/data/shimdongseup/cartData.json")
       .then((res) => res.json())
       .then((data) => {
         setCartItemList(data);
@@ -32,9 +30,9 @@ const Cart = () => {
   const calTotalAmount = (arr) => {
     if (arr) {
       let totalAmount = 0;
-      for (let i = 0; i < arr.length; i++) {
-        totalAmount = totalAmount + arr[i].amount;
-      }
+      arr.forEach((obj) => {
+        totalAmount += obj.amount;
+      });
       return totalAmount;
     }
   };
@@ -42,10 +40,9 @@ const Cart = () => {
   const calTotalPrice = (arr) => {
     if (arr) {
       let priceTotal = 0;
-      for (let i = 0; i < arr.length; i++) {
-        const price = arr[i].amount * arr[i].productPrice;
-        priceTotal = priceTotal + price;
-      }
+      arr.forEach((obj) => {
+        priceTotal += obj.amount * obj.productPrice;
+      });
       return priceTotal;
     }
   };
