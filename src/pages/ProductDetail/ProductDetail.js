@@ -146,6 +146,7 @@ const ProductDetail = () => {
                     className="heartLineIcon"
                     alt="heart"
                     src="/images/leedabin/heartLine.png"
+                    onClick={() => alert("로그인이 필요한 서비스 입니다!")}
                   />
                 )}
               </div>
