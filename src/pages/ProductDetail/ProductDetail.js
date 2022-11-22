@@ -22,6 +22,15 @@ const ProductDetail = () => {
   const [style, setStyle] = useState({ marginLeft: `-${current}00%` });
   const imgSize = useRef(images.current.length);
   const token = localStorage.getItem("TOKEN");
+  const [number, setNumber] = useState(0);
+
+  const onIncrease = () => {
+    setNumber((prevNum) => prevNum + 1);
+  };
+
+  const onDecrease = () => {
+    setNumber((prevNum) => prevNum - 1);
+  };
 
   const moveSlide = (i) => {
     let nextIndex = current + i;
@@ -198,9 +207,13 @@ const ProductDetail = () => {
                 <div className="itemOptBox">
                   <span className="itemOptName">BLACK</span>
                   <div className="optBtnContainer">
-                    <button className="addOptMinus">-</button>
-                    <button className="addOptNum">1</button>
-                    <button className="addOptAdd">+</button>
+                    <button className="addOptMinus" onClick={onDecrease}>
+                      -
+                    </button>
+                    <button className="addOptNum">{number}</button>
+                    <button className="addOptAdd" onClick={onIncrease}>
+                      +
+                    </button>
                   </div>
                   <span className="itemOptAll">297,000원</span>
                   <span className="deleteItem">X</span>
