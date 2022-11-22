@@ -8,7 +8,7 @@ const Login = () => {
     e.preventDefault();
     //로그인 정보 확인
     console.log(account);
-    fetch("http://10.58.52.150:3000/auth/login", {
+    fetch("http://10.58.52.241:3000/auth/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
