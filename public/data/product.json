@@ -1,33 +1,72 @@
-{
-  "productName": "productName",
-  "description": "description",
-  "price": "price",
-  "category": "category",
-  "likesNumber": "likesNumber",
-  "images": [
-     image1,image2,image3
-          ]
-  "reviews": [
+[
   {
-            "reviewTitle"   : "reviewTitle",
-           "reviewContent" : "reviewContent",
-     "reviewImage"   : "imageLink",
-    "rating" 	: "rating",
-    "reviewUser"    : "reviewUser"
-  },
-        {
-            "reviewTitle"   : "reviewTitle",
-           "reviewContent" : "reviewContent",
-     "reviewImage"   : "imageLink",
-    "rating" 	: "rating",
-    "reviewUser"    : "reviewUser"
+    "productName": "뉴발란스 숏다운 (3color)",
+    "description": "포근하고 헤어리한 터치감의 우먼스 집업 가디건, YKK 투웨이 지퍼 사용",
+    "price": 297000,
+    "category": "상의",
+    "likesNumber": "likesNumber",
+    "images": [
+      "/images/leedabin/NB_yellow_set.jpeg",
+      "/images/leedabin/NB_yellow_set_twogirls.jpeg"
+    ],
+    "reviews": [
+      {
+        "reviewTitle": "reviewTitle",
+        "reviewContent": "첫번째 리뷰의 내용입니다.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam nisi quis sem porttitor, eget dictum enim feugiat. Phasellus dignissim libero commodo ligula cursus semper. Maecenas iaculis neque ut nunc egestas sagittis. Donec non venenatis sapien. Curabitur in dictum sem. Nulla posuere semper arcu, in auctor neque interdum ac. Etiam tristique orci dolor, at ultrices nisl tempor semper. Donec massa purus, rhoncus sed maximus id, interdum id ex.",
+        "reviewImage": "/images/leedabin/NB_yellow_sitting.jpg",
+        "rating": "rating",
+        "reviewUser": "@1234KIM"
+      },
+
+      {
+        "reviewTitle": "reviewTitle",
+        "reviewContent": "reviewContent",
+        "reviewImage": "imageLink",
+        "rating": "rating",
+        "reviewUser": "reviewUser"
+      },
+      {
+        "reviewTitle": "reviewTitle",
+        "reviewContent": "reviewContent",
+        "reviewImage": "imageLink",
+        "rating": "rating",
+        "reviewUser": "reviewUser"
+      }
+    ]
   },
   {
-            "reviewTitle"   : "reviewTitle",
-           "reviewContent" : "reviewContent",
-     "reviewImage"   : "imageLink",
-    "rating" 	: "rating",
-    "reviewUser"    : "reviewUser"
+    "productName": "이거슨 두번 째",
+    "description": "플렉시블 한 YKK 투웨이 지퍼 사용",
+    "price": "489,000",
+    "category": "상의",
+    "likesNumber": "likesNumber",
+    "images": [
+      "/images/leedabin/NB_yellow_set.jpeg",
+      "/images/leedabin/NB_yellow_set_twogirls.jpeg",
+      "/images/leedabin/NB_yellow_set_twogirls.jpeg"
+    ],
+    "reviews": [
+      {
+        "reviewTitle": "reviewTitle",
+        "reviewContent": "reviewContent",
+        "reviewImage": "imageLink",
+        "rating": "rating",
+        "reviewUser": "reviewUser"
+      },
+      {
+        "reviewTitle": "reviewTitle",
+        "reviewContent": "reviewContent",
+        "reviewImage": "imageLink",
+        "rating": "rating",
+        "reviewUser": "reviewUser"
+      },
+      {
+        "reviewTitle": "reviewTitle",
+        "reviewContent": "reviewContent",
+        "reviewImage": "imageLink",
+        "rating": "rating",
+        "reviewUser": "reviewUser"
+      }
+    ]
   }
 ]
-}

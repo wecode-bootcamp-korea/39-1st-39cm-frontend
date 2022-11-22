@@ -1,8 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./ProductDetail.scss";
 
 const ProductDetail = () => {
+  const params = useParams();
+  const productId = params.productId;
+
+  // console.log(productId);
+
   const images = useRef([
     {
       src: "/images/leedabin/400_NB_yellow_set.jpg",
@@ -20,16 +25,33 @@ const ProductDetail = () => {
   const [showBox, setShowBox] = useState(false);
   const [current, setCurrent] = useState(0);
   const [style, setStyle] = useState({ marginLeft: `-${current}00%` });
-  const imgSize = useRef(images.current.length);
-  const token = localStorage.getItem("TOKEN");
   const [number, setNumber] = useState(0);
+  const [pdData, setPdData] = useState([]);
+  const [amount, setAmount] = useState(0);
+
+  const imgSize = useRef(images.current.length);
+
+  const token = localStorage.getItem("TOKEN");
+
+  useEffect(() => {
+    // fetch(`https://reqres.in/api/users/${productId}`)
+    fetch("/data/product.json")
+      .then((response) => response.json())
+      .then((data) => setPdData(data));
+  }, []);
 
   const onIncrease = () => {
     setNumber((prevNum) => prevNum + 1);
+    setAmount(amount + 1);
   };
 
   const onDecrease = () => {
-    setNumber((prevNum) => prevNum - 1);
+    if (number <= 0) {
+      setNumber(0);
+    } else {
+      setNumber((prevNum) => prevNum - 1);
+      setAmount(amount - 1);
+    }
   };
 
   const moveSlide = (i) => {
@@ -104,7 +126,7 @@ const ProductDetail = () => {
           <section className="productDetailBox">
             <div className="pdNameHeart">
               <div className="pdLeftBox">
-                <h1>뉴발란스 숏다운 (3color)</h1>
+                <h1>{pdData[0]?.productName}</h1>
                 <span className="score">
                   <span className="starts">
                     <img
@@ -160,10 +182,12 @@ const ProductDetail = () => {
                 )}
               </div>
             </div>
-            <h2 className="price">
-              297,000
-              <span>원</span>
-            </h2>
+            {pdData[0] && (
+              <h2 className="price">
+                {(pdData[0]?.price).toLocaleString()}
+                <span>원</span>
+              </h2>
+            )}
             <section className="colorWrapper" data-role="selectbox">
               <section className="selectBox">
                 <button
@@ -215,14 +239,17 @@ const ProductDetail = () => {
                       +
                     </button>
                   </div>
-                  <span className="itemOptAll">297,000원</span>
+                  <span className="itemOptAll">{pdData[0]?.price}</span>
                   <span className="deleteItem">X</span>
                 </div>
                 <div className="itemOptBottom">
                   <span className="finalPriceKor">총 상품 금액</span>
-                  <span className="finalPriceWon">
-                    297,000<span className="wonKor">원</span>
-                  </span>
+                  {pdData[0] && (
+                    <span className="finalPriceWon">
+                      {(pdData[0]?.price * amount).toLocaleString()}
+                      <span className="wonKor">원</span>
+                    </span>
+                  )}
                 </div>
               </section>
             )}
@@ -245,12 +272,12 @@ const ProductDetail = () => {
       <section className="details">
         <img
           className="detailsInfo"
-          src="/images/leedabin/NB_yellow_set.jpeg"
+          src={pdData[0]?.images[0]}
           alt="임시 상세페이지01"
         />
         <img
           className="detailsInfo2"
-          src="/images/leedabin/NB_yellow_set_twogirls.jpeg"
+          src={pdData[0]?.images[1]}
           alt="임시 상세페이지02"
         />
       </section>
@@ -291,21 +318,22 @@ const ProductDetail = () => {
               50자 이상 포토리뷰 작성 시 최대 1,500 마일리지 적립
             </span>
             <div className="divide"></div>
-            <span className="writeReview">리뷰쓰기</span>
+            <span className="writeReview">
+              <Link className="linkSet" to="/">
+                리뷰쓰기
+              </Link>
+            </span>
           </div>
         </div>
         <section className="reviewBox">
           <div className="reviewPhoto">
-            <img
-              src="/images/leedabin/NB_yellow_sitting.jpg"
-              alt="reviewPhoto"
-            />
+            <img src={pdData[0]?.reviews[0].reviewImage} alt="reviewPhoto" />
+          </div>
+          <div className="reviewCtx">
+            <h3 className="reviewTitle">{pdData[0]?.reviews[0].reviewUser}</h3>
+            <span className="ctx">{pdData[0]?.reviews[0].reviewContent}</span>
           </div>
         </section>
-        <div className="reviewCtx">
-          <h3 className="reviewTitle">@Kim123</h3>
-          <span className="ctx">랄라루</span>
-        </div>
       </section>
     </section>
   );
