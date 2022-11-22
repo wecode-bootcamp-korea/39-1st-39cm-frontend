@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+@keyframes fadeOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*Font set*/
+$FontFace: "Poppins", "Roboto", "Noto Sans KR", sans-serif;
+
+/*Color Set*/
+$greyColor: #f2f2f2;
+$darkGreyColor: #323237;
+$whiteBG: #fff;
+
+@mixin flex($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin fontSet($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin widHeight($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+/* Top nav */
+
+nav {
+  display: fixed;
+  position: relative;
+  @include widHeight(100vw, auto);
+  z-index: 1;
+  font-family: $FontFace;
+  @include fontSet(0.5rem, 800);
+
+  .unsetLink {
+    text-decoration: none;
+    color: $darkGreyColor;
+  }
+
+  .navContent {
+    padding: 1rem 4rem;
+    align-content: center;
+    @include flex(space-between, center);
+
+    .navContentBox {
+      display: flex;
+      flex-direction: row;
+      @include fontSet(0.6rem, 700);
+      color: $darkGreyColor;
+      gap: 1rem;
+
+      img {
+        width: 0.8rem;
+        margin-right: 0.3rem;
+      }
+    }
+
+    .Logo {
+      width: 7rem;
+    }
+  }
+
+  .navCategoriesWrap {
+    @include flex(space-between, center);
+    height: 5rem;
+    padding: 0.5rem 4rem;
+    border-bottom: 2px solid $greyColor;
+    font-weight: 800;
+
+    .navCategories {
+      display: flex;
+    }
+
+    ul {
+      gap: 1rem;
+      cursor: default;
+
+      li {
+        font-size: 1.5rem;
+        border: none;
+        border-bottom: 0.25rem solid transparent;
+
+        &:hover {
+          border-bottom: 0.25rem solid black;
+        }
+      }
+    }
+
+    .searchIcon {
+      width: 2rem;
+      margin-left: 57rem;
+    }
+  }
+}
+
+/* Nav search tap */
+
+.navSearch {
+  @include flex(space-between, flex-end);
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  @include widHeight(100vw, 67vh);
+  padding: 4rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 11;
+  animation: fadeOut 0.2s ease-in-out 0s normal forwards;
+
+  .searchCloseBtn {
+    width: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .sideSearchBox {
+    align-items: center;
+
+    .inputContainer {
+      position: relative;
+      border-bottom: 0.5rem solid #000;
+      @include widHeight(40rem, 4rem);
+
+      .navSearchInput {
+        outline: none;
+        border: none;
+        background-color: transparent;
+        @include fontSet(2rem, 500);
+      }
+
+      .searchIcon {
+        position: absolute;
+        right: 0;
+        height: 3rem;
+      }
+    }
+
+    .searchLank {
+      margin: 1rem 0 6rem;
+
+      .topTopic {
+        @include fontSet(1.6rem, 700);
+      }
+
+      .topKeyword {
+        li {
+          padding: 1.4rem 0 0;
+        }
+      }
+    }
+  }
+}
+
+/* Hover menu */
+
+.dropDown {
+  height: 13rem;
+  background-color: $whiteBG;
+  border-bottom: 2px solid $greyColor;
+  font-size: 1rem;
+  color: $darkGreyColor;
+  animation: fadeOut 0.1s ease-in-out 0s normal forwards;
+
+  .dropDownRow {
+    padding: 0.5rem 4rem;
+
+    .dropDownCategories {
+      @include fontSet(1rem, 800);
+
+      .category {
+        font-weight: 800;
+      }
+
+      li {
+        margin: 1rem 0;
+        font-weight: 400;
+
+        &:hover {
+          font-weight: 900;
+        }
+      }
+    }
+  }
+}
