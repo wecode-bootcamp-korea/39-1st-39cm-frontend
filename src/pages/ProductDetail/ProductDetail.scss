@@ -205,7 +205,8 @@ $borderThinBlack: 1px solid black;
       width: 35rem;
       height: auto;
       padding: 1rem 0;
-      border: 3px solid $greyColor;
+      border: 2px solid $greyColor;
+      margin-bottom: 0.6rem;
 
       .toggleBtn {
         display: flex;
@@ -220,6 +221,39 @@ $borderThinBlack: 1px solid black;
         img {
           width: 1.2rem;
           margin-left: 1rem;
+        }
+      }
+    }
+
+    .sizeWrapper {
+      width: 35rem;
+      height: auto;
+      padding: 1rem 0;
+      border: 2px solid $greyColor;
+
+      .sizeToggleBtn {
+        display: flex;
+        font-weight: 600;
+        border: none;
+        background-color: transparent;
+        justify-content: space-between;
+        padding: 0 1rem;
+        width: 34rem;
+        align-content: center;
+
+        img {
+          width: 1.2rem;
+          margin-left: 1rem;
+        }
+      }
+
+      .selectSizeOption {
+        button {
+          font-weight: 600;
+          @include widHeight(35rem, 2rem);
+          appearance: unset;
+          border: none;
+          background-color: transparent;
         }
       }
     }
@@ -257,6 +291,10 @@ $borderThinBlack: 1px solid black;
     }
     .itemOptAll {
       font-weight: 600;
+    }
+
+    .itemPickedSize {
+      font-weight: 800;
     }
 
     .itemOptBottom {

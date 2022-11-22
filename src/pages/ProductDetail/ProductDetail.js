@@ -21,6 +21,7 @@ const ProductDetail = () => {
   ]);
 
   const [showColorOpt, setShowColorOpt] = useState(false);
+  const [showSizeOpt, setSHowSizeOpt] = useState(false);
   const [likePd, setLikePd] = useState(false);
   const [showBox, setShowBox] = useState(false);
   const [current, setCurrent] = useState(0);
@@ -28,6 +29,9 @@ const ProductDetail = () => {
   const [number, setNumber] = useState(0);
   const [pdData, setPdData] = useState([]);
   const [amount, setAmount] = useState(0);
+
+  const [pickedColor, setPickedColor] = useState("");
+  const [pickedSize, setPickedSize] = useState("");
 
   const imgSize = useRef(images.current.length);
 
@@ -182,6 +186,7 @@ const ProductDetail = () => {
                 )}
               </div>
             </div>
+
             {pdData[0] && (
               <h2 className="price">
                 {(pdData[0]?.price).toLocaleString()}
@@ -208,18 +213,80 @@ const ProductDetail = () => {
                     onClick={() => setShowBox((prev) => !prev)}
                   >
                     <li>
-                      <button type="button" className="optionBtn">
+                      <button
+                        type="button"
+                        className="optionBtn"
+                        onClick={() => setPickedColor("Khaki Grey")}
+                      >
                         Khaki Grey
                       </button>
                     </li>
                     <li>
-                      <button type="button" className="optionBtn">
+                      <button
+                        type="button"
+                        className="optionBtn"
+                        onClick={() => setPickedColor("Black")}
+                      >
                         Black
                       </button>
                     </li>
                     <li>
-                      <button type="button" className="optionBtn">
+                      <button
+                        type="button"
+                        className="optionBtn"
+                        onClick={() => setPickedColor("Navy")}
+                      >
                         Navy
+                      </button>
+                    </li>
+                  </ul>
+                )}
+              </section>
+            </section>
+            <section className="sizeWrapper" data-role="selectbox">
+              <section className="selectBox">
+                <button
+                  type="button"
+                  className="sizeToggleBtn"
+                  onClick={() => setSHowSizeOpt((prev) => !prev)}
+                >
+                  SIZE
+                  <img
+                    src="/images/leedabin/dropDown.png"
+                    alt="downArrow"
+                    className="ico-down"
+                  />
+                </button>
+                {showSizeOpt && (
+                  <ul
+                    className="selectSizeOption"
+                    onClick={() => setSHowSizeOpt((prev) => !prev)}
+                  >
+                    <li>
+                      <button
+                        type="button"
+                        className="optionBtnS"
+                        onClick={() => setPickedSize("SMALL")}
+                      >
+                        SMALL
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        className="optionBtnM"
+                        onClick={() => setPickedSize("MEDIUM")}
+                      >
+                        MEDIUM
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        className="optionBtnL"
+                        onClick={() => setPickedSize("LARGE")}
+                      >
+                        LARGE
                       </button>
                     </li>
                   </ul>
@@ -229,7 +296,8 @@ const ProductDetail = () => {
             {showBox && (
               <section className="itemSelectContainer">
                 <div className="itemOptBox">
-                  <span className="itemOptName">BLACK</span>
+                  <span className="itemOptName">{pickedColor}</span>
+                  <span className="itemPickedSize">{pickedSize}</span>
                   <div className="optBtnContainer">
                     <button className="addOptMinus" onClick={onDecrease}>
                       -
@@ -239,8 +307,11 @@ const ProductDetail = () => {
                       +
                     </button>
                   </div>
-                  <span className="itemOptAll">{pdData[0]?.price}</span>
-                  <span className="deleteItem">X</span>
+
+                  <span className="itemOptAll">
+                    {(pdData[0]?.price).toLocaleString()}
+                  </span>
+                  {/* <span className="deleteItem">X</span> */}
                 </div>
                 <div className="itemOptBottom">
                   <span className="finalPriceKor">총 상품 금액</span>
@@ -253,7 +324,6 @@ const ProductDetail = () => {
                 </div>
               </section>
             )}
-
             <div className="orderBtns">
               <Link to={"/Cart"}>
                 <button className="addCartBtn" type="button">
