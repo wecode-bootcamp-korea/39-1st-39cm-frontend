@@ -20,8 +20,8 @@ const ProductDetail = () => {
   const [showBox, setShowBox] = useState(false);
   const [current, setCurrent] = useState(0);
   const [style, setStyle] = useState({ marginLeft: `-${current}00%` });
-
   const imgSize = useRef(images.current.length);
+  const token = localStorage.getItem("TOKEN");
 
   const moveSlide = (i) => {
     let nextIndex = current + i;
@@ -128,18 +128,26 @@ const ProductDetail = () => {
                 </span>
               </div>
               <div className="pdRightBox">
-                <img
-                  className="heartLineIcon"
-                  alt="heart"
-                  onClick={() => {
-                    setLikePd((prev) => !prev);
-                  }}
-                  src={
-                    likePd === false
-                      ? "/images/leedabin/heartLine.png"
-                      : "/images/leedabin/heartOrange.png"
-                  }
-                />
+                {token ? (
+                  <img
+                    className="heartLineIcon"
+                    alt="heart"
+                    onClick={() => {
+                      setLikePd((prev) => !prev);
+                    }}
+                    src={
+                      likePd === false
+                        ? "/images/leedabin/heartLine.png"
+                        : "/images/leedabin/heartOrange.png"
+                    }
+                  />
+                ) : (
+                  <img
+                    className="heartLineIcon"
+                    alt="heart"
+                    src="/images/leedabin/heartLine.png"
+                  />
+                )}
               </div>
             </div>
             <h2 className="price">

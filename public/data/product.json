@@ -1,0 +1,33 @@
+{
+  "productName": "productName",
+  "description": "description",
+  "price": "price",
+  "category": "category",
+  "likesNumber": "likesNumber",
+  "images": [
+     image1,image2,image3
+          ]
+  "reviews": [
+  {
+            "reviewTitle"   : "reviewTitle",
+           "reviewContent" : "reviewContent",
+     "reviewImage"   : "imageLink",
+    "rating" 	: "rating",
+    "reviewUser"    : "reviewUser"
+  },
+        {
+            "reviewTitle"   : "reviewTitle",
+           "reviewContent" : "reviewContent",
+     "reviewImage"   : "imageLink",
+    "rating" 	: "rating",
+    "reviewUser"    : "reviewUser"
+  },
+  {
+            "reviewTitle"   : "reviewTitle",
+           "reviewContent" : "reviewContent",
+     "reviewImage"   : "imageLink",
+    "rating" 	: "rating",
+    "reviewUser"    : "reviewUser"
+  }
+]
+}
