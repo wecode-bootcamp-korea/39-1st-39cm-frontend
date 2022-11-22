@@ -47,7 +47,7 @@
   .itemList {
     display: flex;
     width: 90vw;
-    min-width: 800px;
+    min-width: 865px;
     max-width: 1500px;
     padding-top: 11px;
     flex-direction: column;
@@ -125,7 +125,6 @@
 
           .itemLink {
             display: block;
-            min-width: 150px;
             color: #000;
             font-size: 16px;
             text-decoration: none;
@@ -195,17 +194,17 @@
           line-height: 24px;
           font-weight: 600;
         }
-        // .goToPayment {
-        //   width: 100px;
-        //   height: 38px;
-        //   display: block;
-        //   text-decoration: none;
-        //   text-align: center;
-        //   line-height: 38px;
-        //   background-color: #000;
-        //   color: #fff;
-        //   margin-top: 15px;
-        // }
+        .goToPayment {
+          display: block;
+          width: 100px;
+          height: 38px;
+          margin-top: 15px;
+          color: #fff;
+          text-align: center;
+          text-decoration: none;
+          line-height: 38px;
+          background-color: #000;
+        }
       }
 
       .deliveryCharge {

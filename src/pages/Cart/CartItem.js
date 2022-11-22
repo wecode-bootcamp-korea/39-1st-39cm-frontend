@@ -61,6 +61,7 @@ const CartItem = ({
     //   });
   };
 
+  //수량 감소 함수
   const subAmount = () => {
     // 처음 fetch 받아온 리스트에서 수량을 수정
     const changedCartList = cartItemList.map((item) => {
@@ -104,17 +105,22 @@ const CartItem = ({
     if (isCheckItem === true) {
       setIsCheckItem(false);
       const newObj = { ...itemInfo, isCheck: !isCheckItem };
-      let newArr = cartItemList;
+      let newArr = [...cartItemList];
       newArr[index] = newObj;
       setCartItemList(newArr);
     } else {
       setIsCheckItem(true);
 
       const newObj = { ...itemInfo, isCheck: !isCheckItem };
-      let newArr = cartItemList;
+      let newArr = [...cartItemList];
       newArr[index] = newObj;
       setCartItemList(newArr);
     }
+  };
+
+  const eachPurchase = () => {
+    const orderItem = [itemInfo];
+    localStorage.setItem("orderList", JSON.stringify(orderItem));
   };
 
   return (
@@ -148,9 +154,9 @@ const CartItem = ({
       </div>
       <div className="orderPrice">
         <div>{totalPrice.toLocaleString()}원</div>
-        {/* <Link className="goToPayment" to="#">
-              BUY NOW
-            </Link> */}
+        <Link onClick={eachPurchase} className="goToPayment" to="/Payment">
+          BUY NOW
+        </Link>
       </div>
       <div className="deliveryCharge">29CM 무료배송</div>
     </div>

@@ -5,7 +5,6 @@ import CartItem from "./CartItem";
 
 const Cart = () => {
   const [cartItemList, setCartItemList] = useState();
-
   const setPaymentItem = () => {
     const paymentItem = cartItemList.filter((obj) => {
       return obj.isCheck === true;
@@ -77,7 +76,6 @@ const Cart = () => {
 
       <div className="itemList">
         <div className="columnName">
-          {/* <input className="checkBox" type="checkBox" /> */}
           <div className="itemInfoCol">상품 정보</div>
           <div className="quantityCol">수량</div>
           <div className="orderPriceCol">주문금액</div>
@@ -118,7 +116,7 @@ const Cart = () => {
             />
           ))}
         <div className="itemListFooter">
-          <button>선택상품 삭제</button>
+          {/* <button>선택상품 삭제</button> */}
           <span>장바구니는 접속 종료 후 60일 동안 보관됩니다.</span>
         </div>
       </div>
