@@ -1,7 +1,7 @@
 @import "../../styles/mixin.scss";
 .wrapPayment {
   @include flex(auto, center);
-  margin: 230px 0 100px;
+  margin: 100px 0 100px;
   font-family: "Noto Sans KR", "Roboto", "Poppins", sans-serif;
   flex-direction: column;
 

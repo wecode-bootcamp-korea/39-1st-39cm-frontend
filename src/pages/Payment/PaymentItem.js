@@ -22,9 +22,11 @@ const PaymentItem = ({ itemInfo }) => {
           {productName}
         </Link>
         <span>옵션 : [사이즈]XL</span>
-        <span className="price">
-          {productPrice}원 / 수량 {amount}개
-        </span>
+        {productPrice && (
+          <span className="price">
+            {productPrice.toLocaleString()}원 / 수량 {amount}개
+          </span>
+        )}
       </div>
     </div>
   );

@@ -1,29 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../Payment/Payment.scss";
 import PaymentItem from "./PaymentItem";
 
 const Payment = () => {
+  const navigate = useNavigate();
   const [cartItemList, setCartItemList] = useState();
   const [userInfo, setUserInfo] = useState();
   useEffect(() => {
-    // mock data fetch
-    fetch("/data/shimdongseup/cartData.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setCartItemList(data);
-      });
-    //   //backend API fetch
-    // fetch("http://127.0.0.1:3000/cart", {
-    //   method: "GET",
-    //   headers: {
-    //     authorization: localStorage.getItem("TOCKEN"),
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setCartItemList(data);
-    //   });
+    //로컬 스토리지 불러오기
+    const orderList = JSON.parse(localStorage.getItem("orderList"));
+    setCartItemList(orderList);
 
+    //백엔드 연결 전 유저 정보 mockdata
     fetch("/data/shimdongseup/userInfo.json")
       .then((res) => res.json())
       .then((data) => {
@@ -54,6 +43,64 @@ const Payment = () => {
   const totalAmount = calTotalAmount(cartItemList);
   const totalPrice = calTotalPrice(cartItemList);
 
+  const paymentCheckout = () => {
+    if (userInfo[0].point - totalPrice >= 0) {
+      alert("성공적으로 결제가 완료 되었습니다.");
+      if (cartItemList) {
+        const deleteCartItem = cartItemList.map((obj) => {
+          return obj.basketId;
+        });
+        const orderedItem = cartItemList.map((obj) => {
+          return { productId: obj.productId, amount: obj.amount };
+        });
+        // console.log(deleteCartItem);
+        // console.log(orderedItem);
+        //주문 완료 api 호출
+        fetch("http://127.0.0.1:3000/checkout", {
+          methode: "POST",
+          header: {
+            authorization: localStorage.getItem("TOKEN"),
+          },
+          body: {
+            orders: orderedItem,
+          },
+        })
+          .then((response) => {
+            if (response.status !== 204) {
+              throw new Error("error");
+            } else {
+              //결제 후 마이페이지로 이동
+              navigate("/MyPage");
+            }
+          })
+          .catch((error) => {
+            console.log("결제 요청에 실패 하였습니다.");
+          });
+
+        //장바구니 삭제 api 호출
+        fetch("http://127.0.0.1:3000/carts", {
+          methode: "DELETE",
+          header: {
+            authorization: localStorage.getItem("TOKEN"),
+          },
+          body: {
+            basketIds: deleteCartItem,
+          },
+        })
+          .then((response) => {
+            if (response.status !== 204) {
+              throw new Error("error");
+            }
+          })
+          .catch((error) => {
+            console.log("장바구니 삭제에 실패하였습니다.");
+          });
+      }
+    } else {
+      alert("포인트가 부족하여 결제에 실패하였습니다.");
+    }
+  };
+
   return (
     <div className="wrapPayment">
       <div className="orderStep">
@@ -66,11 +113,16 @@ const Payment = () => {
           <div className="userInfo">
             배송 정보
             <div className="userInput">
-              수령인<input value={userInfo[0].name} disabled={true}></input>
+              수령인
+              {userInfo && (
+                <input value={userInfo[0].name} disabled={true}></input>
+              )}
             </div>
             <div className="userInput">
               배송지
-              <input value={userInfo[0].address} disabled={true}></input>
+              {userInfo && (
+                <input value={userInfo[0].address} disabled={true}></input>
+              )}
             </div>
             <div className="userInput">
               연락처
@@ -85,7 +137,9 @@ const Payment = () => {
             결제정보
             <div className="wrapPoint">
               <div>잔여 포인트</div>
-              <span>{userInfo[0].point}Point</span>
+              {userInfo && (
+                <span>{userInfo[0].point.toLocaleString()} Point</span>
+              )}
             </div>
             <div className="wrapPoint">
               <div>결제 포인트</div>
@@ -93,7 +147,11 @@ const Payment = () => {
             </div>
             <div className="wrapPoint">
               <div>결제 후 잔여 포인트</div>
-              <span>? Point</span>
+              {userInfo && (
+                <span>
+                  {(userInfo[0].point - totalPrice).toLocaleString()} Point
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -115,7 +173,7 @@ const Payment = () => {
                 </div>
               )}
             </div>
-            <button>CHECKOUT</button>
+            <button onClick={paymentCheckout}>CHECKOUT</button>
           </div>
         </div>
       </div>
