@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "category": "MY PAGE",
+    "img": "/leedabin/mypage.png",
+    "url": "/MyPage"
+  },
+  {
+    "id": 2,
+    "category": "SHOPPING BAG",
+    "img": "/leedabin/shoppingBag.png",
+    "url": "/Cart"
+  },
+  {
+    "id": 3,
+    "category": "LOGIN",
+    "img": "/leedabin/login.png",
+    "url": "/Login"
+  }
+]
