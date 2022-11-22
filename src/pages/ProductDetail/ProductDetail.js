@@ -196,7 +196,7 @@ const ProductDetail = () => {
             <section
               className="colorWrapper"
               data-role="selectbox"
-              onMouseEnter={() => setShowColorOpt(false)}
+              onMouseLeave={() => setShowColorOpt(false)}
             >
               <section className="selectBox">
                 <button
@@ -250,7 +250,7 @@ const ProductDetail = () => {
             <section
               className="sizeWrapper"
               data-role="selectbox"
-              onMouseEnter={() => setSHowSizeOpt(false)}
+              onMouseLeave={() => setSHowSizeOpt(false)}
             >
               <section className="selectBox">
                 <button
