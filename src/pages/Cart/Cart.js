@@ -14,27 +14,34 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    // mock data fetch
-    fetch("/data/shimdongseup/cartData.json")
+    // // mock data fetch
+    // fetch("/data/shimdongseup/cartData.json")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // isCheck 항목 추가해서 리스트 저장
+    //     const newCartList = data.map((obj) => {
+    //       return { ...obj, isCheck: true };
+    //     });
+    //     setCartItemList(newCartList);
+    //   });
+
+    //backend API fetch
+    fetch("http://10.58.52.241:3000/cart", {
+      method: "GET",
+      headers: {
+        authorization: localStorage.getItem("TOKEN"),
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         // isCheck 항목 추가해서 리스트 저장
-        const newCartList = data.map((obj) => {
+        // console.log(data.baskets);
+        // const arr = [...data.baskets];
+        const newCartList = data.baskets.map((obj) => {
           return { ...obj, isCheck: true };
         });
         setCartItemList(newCartList);
       });
-    //   //backend API fetch
-    // fetch("http://127.0.0.1:3000/cart", {
-    //   method: "GET",
-    //   headers: {
-    //     authorization: localStorage.getItem("TOCKEN"),
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setCartItemList(data);
-    //   });
   }, []);
 
   // 총 주문 수량 계산
@@ -90,28 +97,34 @@ const Cart = () => {
               cartItemList={cartItemList}
               index={index}
               deleteItem={function deleteComment() {
-                // 백엔드 연결전 코드
-                const deletedItem = [...cartItemList];
-                deletedItem.splice(index, 1);
-                setCartItemList(deletedItem);
-                // //백앤드 연결시 아래코드로 대체
-                // fetch(`http://127.0.0.1:3000/cart/${obj.basketId}`, {
-                //   method: "DELETE",
-                //   headers: { authorization: localStorage.getItem("TOKEN") },
-                // })
-                //   .then((response) => {
-                //     if (response.status !== 204) {
-                //       throw new Error("error");
-                //     } else {
-                //       //fetch 성공시
-                //       const deletedItem = [...cartItemList];
-                //       deletedItem.splice(index, 1);
-                //       setCartItemList(deletedItem);
-                //     }
-                //   })
-                //   .catch((error) => {
-                //     alert("장바구니 삭제에 실패하였습니다.");
-                //   });
+                // // 백엔드 연결전 코드
+                // const deletedItem = [...cartItemList];
+                // deletedItem.splice(index, 1);
+                // setCartItemList(deletedItem);
+                //백앤드 연결시 아래코드로 대체
+                fetch("http://10.58.52.241:3000/cart", {
+                  method: "DELETE",
+                  headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                    authorization: localStorage.getItem("TOKEN"),
+                  },
+                  body: JSON.stringify({
+                    basketIds: [obj.basketId],
+                  }),
+                })
+                  .then((response) => {
+                    if (response.status !== 204) {
+                      throw new Error("error");
+                    } else {
+                      //fetch 성공시
+                      const deletedItem = [...cartItemList];
+                      deletedItem.splice(index, 1);
+                      setCartItemList(deletedItem);
+                    }
+                  })
+                  .catch((error) => {
+                    alert("장바구니 삭제에 실패하였습니다.");
+                  });
               }}
             />
           ))}
