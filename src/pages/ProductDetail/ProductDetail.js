@@ -193,7 +193,11 @@ const ProductDetail = () => {
                 <span>원</span>
               </h2>
             )}
-            <section className="colorWrapper" data-role="selectbox">
+            <section
+              className="colorWrapper"
+              data-role="selectbox"
+              onMouseEnter={() => setShowColorOpt(false)}
+            >
               <section className="selectBox">
                 <button
                   type="button"
@@ -243,7 +247,11 @@ const ProductDetail = () => {
                 )}
               </section>
             </section>
-            <section className="sizeWrapper" data-role="selectbox">
+            <section
+              className="sizeWrapper"
+              data-role="selectbox"
+              onMouseEnter={() => setSHowSizeOpt(false)}
+            >
               <section className="selectBox">
                 <button
                   type="button"
@@ -282,9 +290,9 @@ const ProductDetail = () => {
                     </li>
                     <li>
                       <button
+                        onClick={() => setPickedSize("LARGE")}
                         type="button"
                         className="optionBtnL"
-                        onClick={() => setPickedSize("LARGE")}
                       >
                         LARGE
                       </button>
