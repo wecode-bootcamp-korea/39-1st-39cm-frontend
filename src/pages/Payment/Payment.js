@@ -45,7 +45,6 @@ const Payment = () => {
 
   const paymentCheckout = () => {
     if (userInfo[0].point - totalPrice >= 0) {
-      alert("성공적으로 결제가 완료 되었습니다.");
       if (cartItemList) {
         const deleteCartItem = cartItemList.map((obj) => {
           return obj.basketId;
@@ -53,23 +52,25 @@ const Payment = () => {
         const orderedItem = cartItemList.map((obj) => {
           return { productId: obj.productId, amount: obj.amount };
         });
-        // console.log(deleteCartItem);
-        // console.log(orderedItem);
+        // console.log("delete :" + deleteCartItem);
+        // console.log("order :" + orderedItem);
         //주문 완료 api 호출
-        fetch("http://127.0.0.1:3000/checkout", {
-          methode: "POST",
-          header: {
+        fetch("http://10.58.52.241:3000/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
             authorization: localStorage.getItem("TOKEN"),
           },
-          body: {
+          body: JSON.stringify({
             orders: orderedItem,
-          },
+          }),
         })
           .then((response) => {
-            if (response.status !== 204) {
+            if (response.status !== 200) {
               throw new Error("error");
             } else {
               //결제 후 마이페이지로 이동
+              alert("성공적으로 결제가 완료 되었습니다.");
               navigate("/MyPage");
             }
           })
@@ -78,18 +79,21 @@ const Payment = () => {
           });
 
         //장바구니 삭제 api 호출
-        fetch("http://127.0.0.1:3000/carts", {
-          methode: "DELETE",
-          header: {
+        fetch("http://10.58.52.241:3000/cart", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
             authorization: localStorage.getItem("TOKEN"),
           },
-          body: {
+          body: JSON.stringify({
             basketIds: deleteCartItem,
-          },
+          }),
         })
           .then((response) => {
             if (response.status !== 204) {
               throw new Error("error");
+            } else {
+              localStorage.setItem("orderList", "");
             }
           })
           .catch((error) => {
