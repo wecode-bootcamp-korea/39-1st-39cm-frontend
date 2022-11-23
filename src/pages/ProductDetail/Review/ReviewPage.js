@@ -42,8 +42,7 @@ const ReviewPage = ({ pdData }) => {
             </span>
           </div>
         </div>
-
-        {pdData[0] &&
+        {pdData.reviews &&
           pdData.reviews.map((el) => {
             return (
               <div className="reviewbBox">

@@ -113,7 +113,7 @@ const ProductDetail = () => {
       behavior: "smooth",
     });
   };
-
+  // console.log(pdData.images[0]);
   return (
     <section className="productDetail">
       <div className="topToEndContainer">
@@ -365,20 +365,14 @@ const ProductDetail = () => {
           </section>
         </div>
       </div>
-      {pdData[0] !== null && (
-        <section className="details">
-          <img
-            className="detailsInfo"
-            src={pdData?.images}
-            alt="임시 상세페이지01"
-          />
-          <img
-            className="detailsInfo2"
-            src={pdData?.images}
-            alt="임시 상세페이지02"
-          />
-        </section>
-      )}
+
+      <div>
+        <div className="details">
+          {pdData.images?.map((image, i) => (
+            <img src={image} alt="thumbnail" className="detailsInfo" />
+          ))}
+        </div>
+      </div>
       <ReviewPage pdData={pdData} />
     </section>
   );
