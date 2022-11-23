@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
-import "./Nav.scss";
 import { Link } from "react-router-dom";
-import KEYWORD_LIST from "./KeywordList";
 import NavIconList from "./NavIconList";
 import DropDown from "./DropDown";
+import "./Nav.scss";
 
 export default function Nav() {
   const [showSearch, setShowSearch] = useState(false);
   const [showHoverMenu, setShowHoverMenu] = useState(0);
   const [dropDownData, setDropDownData] = useState([]);
+  const [inputState, setInputState] = useState("");
+  const [itemList, setItemList] = useState([]);
 
   useEffect(() => {
     fetch("data/DropDownData.json")
       .then((response) => response.json())
       .then((result) => setDropDownData(result));
+
+    //상품리스트 불러오는 fetch
+    fetch(
+      "http://10.58.52.169:3000/products?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender="
+    )
+      .then((response) => response.json())
+      .then((result) => setItemList(result.products));
   }, []);
 
   return (
@@ -41,6 +49,8 @@ export default function Nav() {
                     </Link>
                   </div>
                 );
+              } else {
+                return null;
               }
             })}
             {localStorage.getItem("TOKEN") && (
@@ -90,7 +100,13 @@ export default function Nav() {
               />
               <div className="sideSearchBox">
                 <div className="inputContainer">
-                  <input className="navSearchInput" placeholder="Search" />
+                  <input
+                    className="navSearchInput"
+                    placeholder="Search"
+                    onChange={(e) => {
+                      setInputState(e.target.value);
+                    }}
+                  />
                   <img
                     className="searchIcon"
                     src="/images/leedabin/search.png"
@@ -101,9 +117,28 @@ export default function Nav() {
                   <span className="topTopic">추천검색어</span>
                   <div className="topKeyword">
                     <ul className="keywordList">
-                      {KEYWORD_LIST.map((el) => {
-                        return <li key={el.id}>{el.text}</li>;
-                      })}
+                      {/* <Link to={`/ProductDetail/`}>
+                        <li>검색어</li>
+                      </Link> */}
+                      {itemList &&
+                        itemList.map((item, index) => {
+                          if (
+                            item.productName.toLowerCase().includes(inputState)
+                          ) {
+                            return (
+                              <Link
+                                key={index}
+                                to={`/ProductDetail/${item.productId}`}
+                                className="linkStyle"
+                                onClick={() => setShowSearch(false)}
+                              >
+                                <li>{item.productName}</li>
+                              </Link>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
                     </ul>
                   </div>
                 </section>
@@ -120,6 +155,8 @@ export default function Nav() {
                 mouseLeave={() => setShowHoverMenu(0)}
               />
             );
+          } else {
+            return null;
           }
         })}
       </nav>
