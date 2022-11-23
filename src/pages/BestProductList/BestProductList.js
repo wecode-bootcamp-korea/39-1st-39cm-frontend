@@ -1,24 +1,71 @@
 import React, { useEffect, useState } from "react";
-import "../BestProductList/BestProductList.scss";
-import BestProductBottom from "./Product/BestProductBottom";
 import BestProductTop from "./Product/BestProductTop";
+import BestProductBottom from "./Product/BestProductBottom";
+import "../BestProductList/BestProductList.scss";
+import { useSearchParams } from "react-router-dom";
 
 function BestProductList() {
-  //bestProductTop,Bottom
-  // const [bestProductTop, setBestProductTop] = useState([]);
-  const [bestProductBottom, setBestProductBottom] = useState([]);
+  const [women, setWomen] = useState([]);
   const [titleHandler, setTitleHandler] = useState(0);
   const titleName = titleData[titleHandler];
 
-  // useEffect(() => {
-  //   fetch("/data/kimdongki/bestProductTopList.json")
-  //     .then((response) => response.json())
-  //     .then((result) => setBestProductTop(result));
-  // }, []);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const gender = searchParams.get("product_gender");
+  const category = searchParams.get("category");
+  const sort = searchParams.get("sort");
   useEffect(() => {
-    fetch("/data/kimdongki/bestProductBottomList.json")
+    fetch(
+      `http://127.0.0.1:3000/products?limit=&offset=&sort=${sort}&color=&min_price=&max_price=&category=${category}&brand=&product_gender=${gender}`
+    )
       .then((response) => response.json())
-      .then((result) => setBestProductBottom(result));
+      .then((result) => setWomen(result));
+  }, [gender, category, sort]);
+
+  const movePage = (gender, category, data) => {
+    searchParams.set("product_gender", gender);
+    if (category) {
+      searchParams.set("category", category);
+    } else {
+      searchParams.set("category", "");
+    }
+    setSearchParams(searchParams);
+    setTitleHandler(data.id);
+  };
+
+  const moveCategory = (gender, category) => {
+    searchParams.set("product_gender", gender);
+    if (category) {
+      searchParams.set("category", category);
+    } else {
+      searchParams.set("category", "");
+    }
+    setSearchParams(searchParams);
+  };
+
+  const moveSort = (sort) => {
+    if (sort) {
+      searchParams.set("sort", sort);
+    } else {
+      searchParams.set("sort", "");
+    }
+    setSearchParams(searchParams);
+  };
+
+  useEffect(() => {
+    fetch("/data/kimdongki/Women.json")
+      .then((response) => response.json())
+      .then((result) => setWomen(result));
+    // fetch(
+    //   `http://127.0.0.1:3000/products?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=`
+    // )
+    //   .then((response) => response.json())
+    //   .then((result) => setwomen(result));
+    // }, [productGender, category]);
+    // useEffect(() => {
+    //   fetch("/products?category=1")
+    //     .then((response) => response.json())
+    //     .then((result) => setData(result));
   }, []);
 
   return (
@@ -28,12 +75,12 @@ function BestProductList() {
           <h2 className="title">BEST</h2>
           <ul className="leftSideList">
             <ul className="categoryNameList">
-              {titleData.map((data) => (
-                <li className="categoryName">
+              {titleData.map((data, index) => (
+                <li key={index} className="categoryName">
                   <button
                     key={data.id}
                     className="firstName"
-                    onClick={() => setTitleHandler(data.id)}
+                    onClick={() => movePage(data.gender, data.category, data)}
                   >
                     {data.title}
                   </button>
@@ -48,17 +95,11 @@ function BestProductList() {
         <div className="categories">
           <ul className="categoriesList">
             <span className="list">
-              <input
-                className="kind"
-                type="radio"
-                name="categoryMediumList"
-                value
-                checked
-              />
+              <input className="kind" type="radio" name="categoryMediumList" />
               <label
                 className="choice"
-                for="categoryMediumList"
                 title="categoryMediumList"
+                onClick={() => moveCategory(2, "")}
               >
                 {titleName.category1}
               </label>
@@ -72,8 +113,8 @@ function BestProductList() {
               />
               <label
                 className="choice"
-                for="secondCategoryMediumList"
                 title="categoryMediumList"
+                onClick={() => moveCategory(2, 1)}
               >
                 {titleName.category2}
               </label>
@@ -87,27 +128,64 @@ function BestProductList() {
               />
               <label
                 className="choice"
-                for="thirdCategoryMediumList"
                 title="categoryMediumList"
+                onClick={() => moveCategory(2, 2)}
               >
                 {titleName.category3}
               </label>
+              <div className="sortFilter">
+                <div>
+                  <input
+                    onClick={() => moveSort("review")}
+                    className="sort"
+                    type="radio"
+                    value="리뷰순"
+                    name="sort"
+                  />
+                  리뷰순
+                </div>
+
+                <div>
+                  <input
+                    onClick={() => moveSort("like")}
+                    className="sort"
+                    type="radio"
+                    value="좋아요순"
+                    name="sort"
+                  />
+                  좋아요순
+                </div>
+                <div>
+                  <input
+                    onClick={() => moveSort("")}
+                    className="sort"
+                    type="radio"
+                    value="판매량순"
+                    name="sort"
+                  />
+                  판매량순
+                </div>
+              </div>
             </span>
           </ul>
         </div>
         <ul className="productListTop">
-          {bestProductBottom &&
-            bestProductBottom.map((obj, index) => {
+          {women &&
+            women.map((obj, index) => {
               if (index < 3) {
                 return <BestProductTop key={index} product={obj} />;
+              } else {
+                return null;
               }
             })}
         </ul>
         <ul className="productListBottom">
-          {bestProductBottom &&
-            bestProductBottom.map((product, index) => {
+          {women &&
+            women.map((product, index) => {
               if (index > 2) {
                 return <BestProductBottom key={index} product={product} />;
+              } else {
+                return null;
               }
             })}
         </ul>
@@ -123,6 +201,8 @@ const titleData = [
     category1: "전체",
     category2: "상의",
     category3: "하의",
+    gender: 2,
+    category: "",
   },
   {
     id: 1,
@@ -130,11 +210,15 @@ const titleData = [
     category1: "전체",
     category2: "상의",
     category3: "하의",
+    gender: 1,
+    category: "",
   },
   {
     id: 2,
     title: "신발",
     category1: "전체",
+    gender: 3,
+    category: "",
   },
 ];
 

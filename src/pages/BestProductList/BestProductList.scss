@@ -142,6 +142,13 @@ button {
   height: 13px;
   background: transparent;
 }
+.sortFilter {
+  margin-left: 400px;
+  display: flex;
+  .sort {
+    appearance: radio;
+  }
+}
 
 .choice {
   padding-left: 0px;
