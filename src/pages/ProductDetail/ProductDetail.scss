@@ -1,12 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
-@font-face {
-  font-family: "Campton";
-  src: local("Campton"), url("/styles/font/Campton-BoldDEMO.otf") format("otf");
-}
-
 /* variable set */
-$FontFace: "Campton", "Poppins", "Roboto", "Noto Sans KR", sans-serif;
+$FontFace: "Poppins", "Roboto", "Noto Sans KR", sans-serif;
 $greyColor: #f2f2f2;
 $deepGreyColor: #d4d4d4;
 $darkGreyColor: #323237;

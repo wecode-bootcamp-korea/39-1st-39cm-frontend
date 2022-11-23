@@ -32,33 +32,23 @@ const ProductDetail = () => {
       .catch((error) => alert("장바구니 추가에 실패하였습니다."));
   };
 
-  //  동섭님 제가 여기부터 써봤어요
-  const buyNow = () => {
-    fetch("http://127.0.0.1:3000/checkout", {
-      method: "POST",
-      headers: {
-        authorization: localStorage.getItem("TOKEN"),
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({
-        orders: [
-          { productId: 3, amount: 4 },
-          { productId: 4, amount: 4 },
-        ],
-      }),
-    })
-      .then((response) => {
-        if (response.status !== 201) {
-          throw new Error("에러 발생!");
-        } else {
-          navigator("/Cart");
-        }
-      })
-      .catch((error) => alert("바로구매에 실패하였습니다."));
+  const setPaymentItem = () => {
+    if (localStorage.getItem("TOKEN")) {
+      localStorage.setItem(
+        "orderList",
+        // 동섭님과 형식 맞추기 ,pd데이터 백엔드에서 받아보고 변수명 수정 필요!!!!
+        JSON.stringify({
+          productId: productId,
+          productName: pdData.productName,
+          productPrice: pdData.price,
+          images: pdData.images,
+          brandName: pdData.brandName,
+          amount: amount,
+        })
+      );
+      navigator("/Payment");
+    } else alert("로그인이 필요한 서비스 입니다.");
   };
-
-  //여기까지도 써 봤어요
-  //366번 이후에 {buynow} 가 있어요!!!!
 
   const [showColorOpt, setShowColorOpt] = useState(false);
   const [showSizeOpt, setSHowSizeOpt] = useState(false);
@@ -373,7 +363,11 @@ const ProductDetail = () => {
               <button className="addCartBtn" type="button" onClick={addCart}>
                 장바구니 담기
               </button>
-              <button className="buyNowBtn" type="button" onClick={buyNow}>
+              <button
+                className="buyNowBtn"
+                type="button"
+                onClick={setPaymentItem}
+              >
                 바로 구매하기
               </button>
             </div>
