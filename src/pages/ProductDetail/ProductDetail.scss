@@ -93,8 +93,8 @@ $borderThinBlack: 1px solid black;
           display: flex;
 
           img {
-            @include widHeight(400px, 400px);
-            object-fit: contain;
+            @include widHeight(400px, auto);
+            object-fit: cover;
             flex: none;
           }
         }

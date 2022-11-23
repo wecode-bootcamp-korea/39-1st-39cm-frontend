@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import React from "react";
 import "./ReviewPage.scss";
 
 const ReviewPage = ({ pdData }) => {
@@ -8,7 +8,7 @@ const ReviewPage = ({ pdData }) => {
         <div className="reviewInfo">
           <div className="reviewTopLeftBox">
             <span className="reviewCount">
-              리뷰(203)
+              리뷰 Review
               <img
                 className="start"
                 src="/images/leedabin/startOrange.png"
@@ -40,16 +40,11 @@ const ReviewPage = ({ pdData }) => {
             <span className="reviewRule">
               50자 이상 포토리뷰 작성 시 최대 1,500 마일리지 적립
             </span>
-            <div className="divide"></div>
-            <span className="writeReview">
-              <Link className="linkSet" to="/">
-                리뷰쓰기
-              </Link>
-            </span>
           </div>
         </div>
+
         {pdData[0] &&
-          pdData[0].reviews.map((el) => {
+          pdData.reviews.map((el) => {
             return (
               <div className="reviewbBox">
                 <div className="reviewPhoto">
@@ -60,6 +55,7 @@ const ReviewPage = ({ pdData }) => {
                   />
                   <div className="reviewCtx">
                     <h3 className="reviewTitle">{el.reviewTitle}</h3>
+                    <h3 className="reviewUser">{el.reviewUser}</h3>
                     <span className="ctx">{el.reviewContent}</span>
                   </div>
                 </div>

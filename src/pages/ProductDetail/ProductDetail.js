@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ProductDetail.scss";
 import ReviewPage from "./Review/ReviewPage";
 
 const ProductDetail = () => {
+  const navigator = useNavigate();
   const params = useParams();
   const productId = params.productId;
 
@@ -19,7 +20,29 @@ const ProductDetail = () => {
     },
   ]);
 
-  const [thumbnails, setThumbnails] = useState([]);
+  const addCart = () => {
+    fetch("http://127.0.0.1:3000/cart", {
+      method: "POST",
+      headers: {
+        authorization: localStorage.getItem("TOKEN"),
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        productId: productId,
+        amount: amount,
+      }),
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("에러 발생!");
+        } else {
+          navigator("/Cart");
+        }
+      })
+      .catch((error) => alert("장바구니 추가에 실패하였습니다."));
+  };
+
+  // const [thumbnails, setThumbnails] = useState([]); 이거 고치려면 useRef 고쳐야해서 잠시만요
 
   const [showColorOpt, setShowColorOpt] = useState(false);
   const [showSizeOpt, setSHowSizeOpt] = useState(false);
@@ -38,28 +61,13 @@ const ProductDetail = () => {
 
   const token = localStorage.getItem("TOKEN");
 
-  //장바구니//
-  const [cartItemList, setCartItemList] = useState();
-  const setPaymentItem = () => {
-    const paymentItem = cartItemList.filter((obj) => {
-      return obj.isCheck === true;
-    });
-    localStorage.setItem("orderList", JSON.stringify(paymentItem));
-    return paymentItem;
-  };
-  //장바구니
-
   useEffect(() => {
     //통신용입니다
     // fetch(`https://reqres.in/api/users/${productId}`)
     fetch("/data/product.json")
       .then((response) => response.json())
       .then((data) => setPdData(data));
-
-    // fetch("http://127.0.0.1:3000/cart", {});
   }, []);
-
-  // console.log(pdData.price);
 
   const onIncrease = () => {
     setNumber((prevNum) => prevNum + 1);
@@ -106,10 +114,6 @@ const ProductDetail = () => {
     });
   };
 
-  // const totalPrice = pdData?.price.toLocaleString();
-  // console.log(totalPrice);
-  // console.log(typeof Number(pdData.price).toLocaleString());
-
   return (
     <section className="productDetail">
       <div className="topToEndContainer">
@@ -142,7 +146,6 @@ const ProductDetail = () => {
                 <img src="/images/leedabin/arrowRight.png" alt="arrowright" />
               </button>
             </div>
-
             <div className="flexBox" style={style}>
               {pdData.images?.map((image, i) => (
                 // <img key={i} className="img" src={img.src} alt="thumbnail" />
@@ -182,7 +185,6 @@ const ProductDetail = () => {
                       alt="start"
                     />
                   </span>
-                  <span className="reviewSeeMore"> N개 리뷰 보기</span>
                 </span>
               </div>
               <div className="pdRightBox">
@@ -353,11 +355,9 @@ const ProductDetail = () => {
               </section>
             )}
             <div className="orderBtns">
-              <Link to={"/Cart"}>
-                <button className="addCartBtn" type="button">
-                  장바구니 담기
-                </button>
-              </Link>
+              <button className="addCartBtn" type="button" onClick={addCart}>
+                장바구니 담기
+              </button>
               <button className="buyNowBtn" type="button">
                 바로 구매하기
               </button>
@@ -365,18 +365,20 @@ const ProductDetail = () => {
           </section>
         </div>
       </div>
-      <section className="details">
-        <img
-          className="detailsInfo"
-          src={pdData.images}
-          alt="임시 상세페이지01"
-        />
-        <img
-          className="detailsInfo2"
-          src={pdData.images}
-          alt="임시 상세페이지02"
-        />
-      </section>
+      {pdData[0] !== null && (
+        <section className="details">
+          <img
+            className="detailsInfo"
+            src={pdData?.images}
+            alt="임시 상세페이지01"
+          />
+          <img
+            className="detailsInfo2"
+            src={pdData?.images}
+            alt="임시 상세페이지02"
+          />
+        </section>
+      )}
       <ReviewPage pdData={pdData} />
     </section>
   );
