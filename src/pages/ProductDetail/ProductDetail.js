@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./ProductDetail.scss";
+import ReviewPage from "./Review/ReviewPage";
 
 const ProductDetail = () => {
   const params = useParams();
   const productId = params.productId;
-
-  // console.log(productId);
 
   const images = useRef([
     {
@@ -20,6 +19,8 @@ const ProductDetail = () => {
     },
   ]);
 
+  const [thumbnails, setThumbnails] = useState([]);
+
   const [showColorOpt, setShowColorOpt] = useState(false);
   const [showSizeOpt, setSHowSizeOpt] = useState(false);
   const [likePd, setLikePd] = useState(false);
@@ -27,7 +28,7 @@ const ProductDetail = () => {
   const [current, setCurrent] = useState(0);
   const [style, setStyle] = useState({ marginLeft: `-${current}00%` });
   const [number, setNumber] = useState(0);
-  const [pdData, setPdData] = useState([]);
+  const [pdData, setPdData] = useState({});
   const [amount, setAmount] = useState(0);
 
   const [pickedColor, setPickedColor] = useState("");
@@ -37,12 +38,28 @@ const ProductDetail = () => {
 
   const token = localStorage.getItem("TOKEN");
 
+  //장바구니//
+  const [cartItemList, setCartItemList] = useState();
+  const setPaymentItem = () => {
+    const paymentItem = cartItemList.filter((obj) => {
+      return obj.isCheck === true;
+    });
+    localStorage.setItem("orderList", JSON.stringify(paymentItem));
+    return paymentItem;
+  };
+  //장바구니
+
   useEffect(() => {
+    //통신용입니다
     // fetch(`https://reqres.in/api/users/${productId}`)
     fetch("/data/product.json")
       .then((response) => response.json())
       .then((data) => setPdData(data));
+
+    // fetch("http://127.0.0.1:3000/cart", {});
   }, []);
+
+  // console.log(pdData.price);
 
   const onIncrease = () => {
     setNumber((prevNum) => prevNum + 1);
@@ -89,6 +106,10 @@ const ProductDetail = () => {
     });
   };
 
+  // const totalPrice = pdData?.price.toLocaleString();
+  // console.log(totalPrice);
+  // console.log(typeof Number(pdData.price).toLocaleString());
+
   return (
     <section className="productDetail">
       <div className="topToEndContainer">
@@ -121,16 +142,18 @@ const ProductDetail = () => {
                 <img src="/images/leedabin/arrowRight.png" alt="arrowright" />
               </button>
             </div>
+
             <div className="flexBox" style={style}>
-              {images.current.map((img, i) => (
-                <img key={i} className="img" src={img.src} alt="thumbnail" />
+              {pdData.images?.map((image, i) => (
+                // <img key={i} className="img" src={img.src} alt="thumbnail" />
+                <img src={image} alt="thumbnail" />
               ))}
             </div>
           </div>
           <section className="productDetailBox">
             <div className="pdNameHeart">
               <div className="pdLeftBox">
-                <h1>{pdData[0]?.productName}</h1>
+                <h1>{pdData?.productName}</h1>
                 <span className="score">
                   <span className="starts">
                     <img
@@ -186,10 +209,9 @@ const ProductDetail = () => {
                 )}
               </div>
             </div>
-
-            {pdData[0] && (
+            {pdData[0] !== null && (
               <h2 className="price">
-                {(pdData[0]?.price).toLocaleString()}
+                {Number(pdData.price).toLocaleString()}
                 <span>원</span>
               </h2>
             )}
@@ -315,17 +337,15 @@ const ProductDetail = () => {
                       +
                     </button>
                   </div>
-
                   <span className="itemOptAll">
-                    {(pdData[0]?.price).toLocaleString()}
+                    {Number(pdData.price).toLocaleString()}
                   </span>
-                  {/* <span className="deleteItem">X</span> */}
                 </div>
                 <div className="itemOptBottom">
                   <span className="finalPriceKor">총 상품 금액</span>
-                  {pdData[0] && (
+                  {pdData[0] !== null && (
                     <span className="finalPriceWon">
-                      {(pdData[0]?.price * amount).toLocaleString()}
+                      {Number(pdData.price * amount).toLocaleString()}
                       <span className="wonKor">원</span>
                     </span>
                   )}
@@ -338,11 +358,9 @@ const ProductDetail = () => {
                   장바구니 담기
                 </button>
               </Link>
-              <Link to={"/Payment"}>
-                <button className="buyNowBtn" type="button">
-                  바로 구매하기
-                </button>
-              </Link>
+              <button className="buyNowBtn" type="button">
+                바로 구매하기
+              </button>
             </div>
           </section>
         </div>
@@ -350,69 +368,16 @@ const ProductDetail = () => {
       <section className="details">
         <img
           className="detailsInfo"
-          src={pdData[0]?.images[0]}
+          src={pdData.images}
           alt="임시 상세페이지01"
         />
         <img
           className="detailsInfo2"
-          src={pdData[0]?.images[1]}
+          src={pdData.images}
           alt="임시 상세페이지02"
         />
       </section>
-      <section className="reviewContainer">
-        <div className="reviewInfo">
-          <div className="reviewTopLeftBox">
-            <span className="reviewCount">
-              리뷰(203)
-              <img
-                className="start"
-                src="/images/leedabin/startOrange.png"
-                alt="start"
-              />
-              <img
-                className="start"
-                src="/images/leedabin/startOrange.png"
-                alt="start"
-              />
-              <img
-                className="start"
-                src="/images/leedabin/startOrange.png"
-                alt="start"
-              />
-              <img
-                className="start"
-                src="/images/leedabin/startOrange.png"
-                alt="start"
-              />
-              <img
-                className="start"
-                src="/images/leedabin/startOrange.png"
-                alt="start"
-              />
-            </span>
-          </div>
-          <div className="reviewTopRightBox">
-            <span className="reviewRule">
-              50자 이상 포토리뷰 작성 시 최대 1,500 마일리지 적립
-            </span>
-            <div className="divide"></div>
-            <span className="writeReview">
-              <Link className="linkSet" to="/">
-                리뷰쓰기
-              </Link>
-            </span>
-          </div>
-        </div>
-        <section className="reviewBox">
-          <div className="reviewPhoto">
-            <img src={pdData[0]?.reviews[0].reviewImage} alt="reviewPhoto" />
-          </div>
-          <div className="reviewCtx">
-            <h3 className="reviewTitle">{pdData[0]?.reviews[0].reviewUser}</h3>
-            <span className="ctx">{pdData[0]?.reviews[0].reviewContent}</span>
-          </div>
-        </section>
-      </section>
+      <ReviewPage pdData={pdData} />
     </section>
   );
 };

@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+@font-face {
+  font-family: "Campton";
+  src: local("Campton"), url("/styles/font/Campton-BoldDEMO.otf") format("otf");
+}
+
+/* variable set */
+$FontFace: "Campton", "Poppins", "Roboto", "Noto Sans KR", sans-serif;
+$greyColor: #f2f2f2;
+$deepGreyColor: #d4d4d4;
+$darkGreyColor: #323237;
+$borderLine: 4px solid black;
+$borderThinBlack: 1px solid black;
+
+/* mixin set */
+@mixin unsetDefault {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+@mixin flex($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin fontSet($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin widHeight($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+.reviewbBox {
+  @include widHeight(62rem, 30rem);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border-top: $borderLine;
+  background-color: white;
+
+  .reviewPhoto {
+    @include widHeight(62rem, auto);
+    object-fit: contain;
+    display: flex;
+
+    .reviewImage {
+      @include widHeight(30rem, auto);
+      object-fit: cover;
+      overflow: hidden;
+    }
+
+    .reviewCtx {
+      height: 30rem;
+      width: 32rem;
+      line-height: 1.8rem;
+      padding: 2rem 3rem;
+      overflow: scroll;
+
+      .reviewTitle {
+        margin-bottom: 1rem;
+        font-weight: 900;
+        font-size: 1.3rem;
+      }
+
+      .reviewUser {
+        margin-bottom: 1rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
