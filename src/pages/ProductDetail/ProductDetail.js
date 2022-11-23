@@ -8,17 +8,7 @@ const ProductDetail = () => {
   const params = useParams();
   const productId = params.productId;
 
-  const images = useRef([
-    {
-      src: "/images/leedabin/400_NB_yellow_set.jpg",
-    },
-    {
-      src: "/images/leedabin/400_NB_yellow_set_twogirls.jpg",
-    },
-    {
-      src: "/images/leedabin/400_NB_yellow_sitting.jpg",
-    },
-  ]);
+  const images = useRef([]);
 
   const addCart = () => {
     fetch("http://127.0.0.1:3000/cart", {
@@ -42,7 +32,33 @@ const ProductDetail = () => {
       .catch((error) => alert("장바구니 추가에 실패하였습니다."));
   };
 
-  // const [thumbnails, setThumbnails] = useState([]); 이거 고치려면 useRef 고쳐야해서 잠시만요
+  //  동섭님 제가 여기부터 써봤어요
+  const buyNow = () => {
+    fetch("http://127.0.0.1:3000/checkout", {
+      method: "POST",
+      headers: {
+        authorization: localStorage.getItem("TOKEN"),
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        orders: [
+          { productId: 3, amount: 4 },
+          { productId: 4, amount: 4 },
+        ],
+      }),
+    })
+      .then((response) => {
+        if (response.status !== 201) {
+          throw new Error("에러 발생!");
+        } else {
+          navigator("/Cart");
+        }
+      })
+      .catch((error) => alert("바로구매에 실패하였습니다."));
+  };
+
+  //여기까지도 써 봤어요
+  //366번 이후에 {buynow} 가 있어요!!!!
 
   const [showColorOpt, setShowColorOpt] = useState(false);
   const [showSizeOpt, setSHowSizeOpt] = useState(false);
@@ -113,7 +129,7 @@ const ProductDetail = () => {
       behavior: "smooth",
     });
   };
-  // console.log(pdData.images[0]);
+
   return (
     <section className="productDetail">
       <div className="topToEndContainer">
@@ -148,7 +164,6 @@ const ProductDetail = () => {
             </div>
             <div className="flexBox" style={style}>
               {pdData.images?.map((image, i) => (
-                // <img key={i} className="img" src={img.src} alt="thumbnail" />
                 <img src={image} alt="thumbnail" />
               ))}
             </div>
@@ -358,7 +373,7 @@ const ProductDetail = () => {
               <button className="addCartBtn" type="button" onClick={addCart}>
                 장바구니 담기
               </button>
-              <button className="buyNowBtn" type="button">
+              <button className="buyNowBtn" type="button" onClick={buyNow}>
                 바로 구매하기
               </button>
             </div>
