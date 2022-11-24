@@ -1,0 +1,142 @@
+.product {
+  grid-column: auto / span 4;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgb(228, 228, 228);
+  position: relative;
+}
+
+::before {
+  width: 62px;
+  height: 62px;
+  font-size: 28px;
+  letter-spacing: 2px;
+  line-height: 62px;
+}
+
+.product::before {
+  counter-increment: list-number 1;
+  content: counter(list-number);
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  position: absolute;
+  left: 0%;
+  top: 0px;
+  background-color: rgb(0, 0, 0);
+  z-index: 1;
+  pointer-events: none;
+  color: white;
+  font-weight: 400;
+}
+
+.ware {
+  font-size: 12px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.productInfo {
+  color: rgb(0, 0, 0);
+}
+
+.wareInfo {
+  overflow: hidden;
+  position: relative;
+  padding-top: 100%;
+  background-color: rgb(244, 244, 244);
+
+  img {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.productExplanation {
+  padding: 16px 0px 0px;
+}
+
+.brand {
+  color: rgb(0, 0, 0);
+  line-height: 1.4;
+  display: block;
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  margin-bottom: 4px;
+  text-decoration: none;
+}
+
+.wareName {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.wareShowing {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.wareExplanation {
+  font-weight: 300;
+  font-size: inherit;
+  white-space: normal;
+  display: -webkit-box;
+  max-height: calc(4.2em);
+  overflow-wrap: break-word;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.discountPrice {
+  font-weight: inherit;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+.like {
+  color: rgb(93, 93, 93);
+  font-size: 11px;
+  margin-top: 16px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.heart {
+  font-size: inherit;
+  color: inherit;
+  display: flex;
+  margin-right: 4px;
+  padding: 0;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 20px;
+  line-height: 1;
+}
+
+.comment {
+  color: inherit;
+  margin-left: 5px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-decoration: none;
+
+  img {
+    margin-right: 4px;
+  }
+}

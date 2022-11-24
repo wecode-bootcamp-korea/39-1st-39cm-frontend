@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavIconList from "./NavIconList";
 import DropDown from "./DropDown";
 import "./Nav.scss";
 
 export default function Nav() {
+  const ipAddress = "13.124.197.217";
+  const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
   const [showHoverMenu, setShowHoverMenu] = useState(0);
   const [dropDownData, setDropDownData] = useState([]);
@@ -18,7 +20,7 @@ export default function Nav() {
 
     //상품리스트 불러오는 fetch
     fetch(
-      "http://10.58.52.169:3000/products?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender="
+      `http://${ipAddress}:3000/products?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=`
     )
       .then((response) => response.json())
       .then((result) => setItemList(result.products));
@@ -43,10 +45,20 @@ export default function Nav() {
               if (el.id !== 3) {
                 return (
                   <div key={el.id}>
-                    <Link className="unsetLink" to={el.url}>
+                    <button
+                      className="unsetLink"
+                      onClick={() => {
+                        if (localStorage.getItem("TOKEN")) {
+                          navigate(el.url);
+                        } else {
+                          alert("로그인 후 이용 가능한 서비스 입니다.");
+                          navigate("/Login");
+                        }
+                      }}
+                    >
                       <img src={el.img} alt="icon-img" />
                       <span>{el.text}</span>
-                    </Link>
+                    </button>
                   </div>
                 );
               } else {
@@ -77,10 +89,34 @@ export default function Nav() {
         </section>
         <section className="navCategoriesWrap">
           <ul className="navCategories">
-            <li onMouseEnter={() => setShowHoverMenu(0)}>BEST</li>
-            <li onMouseEnter={() => setShowHoverMenu(1)}>WOMEN</li>
-            <li onMouseEnter={() => setShowHoverMenu(2)}>MEN</li>
-            <li onMouseEnter={() => setShowHoverMenu(3)}>UNISEX</li>
+            <Link
+              to="/BestProductList?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=2"
+              className="navCategory"
+              onMouseEnter={() => setShowHoverMenu(0)}
+            >
+              BEST
+            </Link>
+            <Link
+              to="/BestProductList?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=2"
+              className="navCategory"
+              onMouseEnter={() => setShowHoverMenu(1)}
+            >
+              WOMEN
+            </Link>
+            <Link
+              to="/BestProductList?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=1"
+              className="navCategory"
+              onMouseEnter={() => setShowHoverMenu(2)}
+            >
+              MEN
+            </Link>
+            <Link
+              to="/BestProductList?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=3"
+              className="navCategory"
+              onMouseEnter={() => setShowHoverMenu(3)}
+            >
+              UNISEX
+            </Link>
           </ul>
           <img
             className="searchIcon"

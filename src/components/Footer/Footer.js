@@ -8,9 +8,9 @@ const Footer = () => {
       <div className="wrapLink">
         <div className="linkList">
           <div>SHOPPING LIST</div>
-          {SHOPPING_LIST.map((obj) => {
+          {SHOPPING_LIST.map((obj, index) => {
             return (
-              <Link className="link" to={obj.link}>
+              <Link key={index} className="link" to={obj.link}>
                 {obj.pageName}
               </Link>
             );
@@ -18,9 +18,9 @@ const Footer = () => {
         </div>
         <div className="linkList">
           <div>ACCOUNT</div>
-          {ACCOUNT_LINK_LIST.map((obj) => {
+          {ACCOUNT_LINK_LIST.map((obj, index) => {
             return (
-              <Link className="link" to={obj.link}>
+              <Link key={index} className="link" to={obj.link}>
                 {obj.pageName}
               </Link>
             );
@@ -30,9 +30,9 @@ const Footer = () => {
       <div className="wrapProfile">
         <div className="developer">DEVERLOPER</div>
         <div className="profiles">
-          {PROFILE_LIST.map((obj) => {
+          {PROFILE_LIST.map((obj, index) => {
             return (
-              <div className="profile">
+              <div key={index} className="profile">
                 <a href={obj.github}>
                   <img src={obj.img} alt="profile_img" />
                 </a>

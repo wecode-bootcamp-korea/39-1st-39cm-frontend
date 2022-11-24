@@ -1,0 +1,28 @@
+.wrapMain {
+  margin-top: 100px;
+  width: 100%;
+  img {
+    transition: 0.4s;
+    &:hover {
+      scale: 1.03;
+    }
+  }
+  .wrapLink {
+    width: 90%;
+    display: flex;
+
+    .wrapLeft {
+      width: 900px;
+      margin-left: 25px;
+    }
+    .wrapRight {
+      margin-left: 50px;
+      width: 900px;
+      display: flex;
+      flex-direction: column;
+      .men {
+        margin-top: 15px;
+      }
+    }
+  }
+}

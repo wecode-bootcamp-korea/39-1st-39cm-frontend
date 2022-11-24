@@ -2,18 +2,11 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const PaymentItem = ({ itemInfo }) => {
-  const {
-    productId,
-    productName,
-    productPrice,
-    image_url,
-    brand_name,
-    basketId,
-    amount,
-  } = itemInfo;
+  const { productId, productName, productPrice, images, brand_name, amount } =
+    itemInfo;
   return (
     <div className="cartItems">
-      <img src={image_url} alt="product_img" />
+      <img src={images} alt="product_img" />
       <div className="itemInfo">
         <Link className="brandLink" to={`/ProductDetail/${productId}`}>
           {brand_name}
@@ -24,7 +17,7 @@ const PaymentItem = ({ itemInfo }) => {
         <span>옵션 : [사이즈]XL</span>
         {productPrice && (
           <span className="price">
-            {productPrice.toLocaleString()}원 / 수량 {amount}개
+            {Number(productPrice).toLocaleString()}원 / {amount}개
           </span>
         )}
       </div>

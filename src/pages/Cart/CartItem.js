@@ -8,15 +8,11 @@ const CartItem = ({
   deleteItem,
   index,
 }) => {
-  const {
-    productId,
-    productName,
-    productPrice,
-    images,
-    brand_name,
-    basketId,
-    amount,
-  } = itemInfo;
+  const { productId, productName, productPrice, images, brand_name, amount } =
+    itemInfo;
+
+  const ipAddress = "13.124.197.217";
+
   const [isCheckItem, setIsCheckItem] = useState(true);
 
   const totalPrice = productPrice * amount;
@@ -33,7 +29,7 @@ const CartItem = ({
     setCartItemList(changedCartList);
 
     //백앤드 서버에 수량을 수정
-    fetch("http://10.58.52.241:3000/cart", {
+    fetch(`http://${ipAddress}:3000/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -74,7 +70,7 @@ const CartItem = ({
     setCartItemList(changedCartList);
 
     //백앤드 연결 시
-    fetch("http://10.58.52.241:3000/cart", {
+    fetch(`http://${ipAddress}:3000/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",

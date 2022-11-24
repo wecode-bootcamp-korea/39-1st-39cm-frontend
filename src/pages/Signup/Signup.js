@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../Signup/Signup.scss";
 
 const Signup = () => {
+  const ipAddress = "13.124.197.217";
+
   const navigate = useNavigate();
   const goToLogin = () => navigate("/Login");
   const [idAlert, setIdAlert] = useState("");
@@ -86,7 +88,7 @@ const Signup = () => {
     } else if (buttonActive === false && signupState === 2) {
       console.log(account);
       //회원가입 확인
-      fetch("http://10.58.52.241:3000/auth/signup", {
+      fetch(`http://${ipAddress}:3000/auth/signup`, {
         method: "post",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -207,7 +209,7 @@ const Signup = () => {
                     name="gender"
                     value="남자"
                     onClick={setGender}
-                  />{" "}
+                  />
                   남자
                 </label>
                 <label className="genderBox">
@@ -216,7 +218,7 @@ const Signup = () => {
                     name="gender"
                     value="여자"
                     onClick={setGender}
-                  />{" "}
+                  />
                   여자
                 </label>
               </div>

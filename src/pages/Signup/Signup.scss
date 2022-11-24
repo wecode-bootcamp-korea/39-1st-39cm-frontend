@@ -75,6 +75,7 @@
           @include flex(auto, center);
           margin-right: 20px;
           input {
+            appearance: auto;
             width: 20px;
             outline: none;
           }
