@@ -73,6 +73,7 @@ nav {
 
   .navCategoriesWrap {
     @include flex(space-between, center);
+    position: relative;
     height: 5rem;
     padding: 0.5rem 4rem;
     border-bottom: 2px solid $greyColor;
@@ -98,8 +99,10 @@ nav {
     }
 
     .searchIcon {
+      position: absolute;
+      right: 0;
       width: 2rem;
-      margin-left: 57rem;
+      margin-right: 4rem;
     }
   }
 }
@@ -152,6 +155,15 @@ nav {
       }
 
       .topKeyword {
+        .linkStyle {
+          text-decoration: none;
+          color: $darkGreyColor;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
         li {
           padding: 1.4rem 0 0;
         }
