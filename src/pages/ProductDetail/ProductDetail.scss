@@ -1,0 +1,399 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+/* variable set */
+$FontFace: "Poppins", "Roboto", "Noto Sans KR", sans-serif;
+$greyColor: #f2f2f2;
+$deepGreyColor: #d4d4d4;
+$darkGreyColor: #323237;
+$borderLine: 4px solid black;
+$borderThinBlack: 1px solid black;
+
+/* mixin set */
+@mixin unsetDefault {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+@mixin flex($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin fontSet($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin widHeight($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+/* prouctDetail SCSS */
+
+.productDetail {
+  font-family: $FontFace;
+  @include flex(none, center);
+  @include widHeight(100vw, auto);
+  flex-direction: column;
+
+  .topToEndContainer {
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+    position: fixed;
+    bottom: 10%;
+    right: 3%;
+
+    button {
+      @include widHeight(2rem, 2rem);
+      @include flex(center, center);
+      appearance: unset;
+      border: none;
+      background-color: black;
+      color: white;
+
+      &:first-child {
+        border-radius: 50% 50% 0 0;
+      }
+
+      &:nth-child(2) {
+        border-radius: 0 0 50% 50%;
+      }
+
+      img {
+        width: 60%;
+        justify-content: center;
+      }
+    }
+  }
+
+  .productDetailContainer {
+    @include flex(none, center);
+    margin-bottom: 7rem;
+
+    .thumbnailContainer {
+      display: flex;
+      @include widHeight(62rem, 25rem);
+      justify-content: space-between;
+
+      .productThumbnail {
+        @include widHeight(400px, 400px);
+        position: relative;
+        overflow: hidden;
+
+        .flexBox {
+          display: flex;
+
+          img {
+            @include widHeight(400px, auto);
+            object-fit: cover;
+            flex: none;
+          }
+        }
+
+        .arrowsSet {
+          @include flex(space-between, center);
+          left: 0;
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          z-index: 1;
+          align-content: center;
+          transform: translateY(-50%);
+
+          .arrowLeft {
+            border: none;
+            width: 2rem;
+            height: 3rem;
+            align-items: center;
+            background-color: white;
+
+            img {
+              width: 80%;
+            }
+          }
+
+          .arrowRight {
+            border: none;
+            width: 2rem;
+            height: 3rem;
+            align-items: center;
+            background-color: white;
+
+            img {
+              width: 80%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .space {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .productDetailBox {
+    @include widHeight(35rem, 25rem);
+    display: flex;
+    flex-direction: column;
+    border-top: $borderLine;
+
+    .pdNameHeart {
+      width: inherit;
+      display: inline-flex;
+      justify-content: space-between;
+
+      .pdLeftBox {
+        @include widHeight(40rem, 5rem);
+        padding: 1rem 0;
+
+        h1 {
+          font-family: $FontFace;
+          @include fontSet(1.2rem, 600);
+          line-height: 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .score {
+          font-family: $FontFace;
+          @include fontSet(0.8rem, 500);
+
+          img {
+            width: 0.9rem;
+          }
+        }
+
+        .reviewSeeMore {
+          padding: 1rem 0;
+          font-family: $FontFace;
+          @include fontSet(0.8rem, 500);
+          color: grey;
+        }
+      }
+
+      .pdRightBox {
+        @include flex(center, center);
+        padding: 1rem;
+        border-left: 0.3px solid grey;
+
+        .heartLineIcon {
+          width: 3rem;
+          padding: 0 0.5rem;
+        }
+      }
+    }
+
+    .price {
+      padding: 1rem 0;
+      @include fontSet(2rem, 600);
+
+      span {
+        font-size: 1.1rem;
+      }
+    }
+
+    .colorWrapper {
+      width: 35rem;
+      height: auto;
+      padding: 1rem 0;
+      border: 2px solid $greyColor;
+      margin-bottom: 0.6rem;
+
+      .toggleBtn {
+        display: flex;
+        font-weight: 600;
+        border: none;
+        background-color: transparent;
+        justify-content: space-between;
+        padding: 0 1rem;
+        width: 34rem;
+        align-content: center;
+
+        img {
+          width: 1.2rem;
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    .sizeWrapper {
+      width: 35rem;
+      height: auto;
+      padding: 1rem 0;
+      border: 2px solid $greyColor;
+
+      .sizeToggleBtn {
+        display: flex;
+        font-weight: 600;
+        border: none;
+        background-color: transparent;
+        justify-content: space-between;
+        padding: 0 1rem;
+        width: 34rem;
+        align-content: center;
+
+        img {
+          width: 1.2rem;
+          margin-left: 1rem;
+        }
+      }
+
+      .selectSizeOption {
+        button {
+          font-weight: 600;
+          @include widHeight(35rem, 2rem);
+          appearance: unset;
+          border: none;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  .selectBoxOption {
+    button {
+      font-weight: 600;
+      @include widHeight(35rem, 2rem);
+      appearance: unset;
+      border: none;
+      background-color: transparent;
+    }
+  }
+
+  .itemSelectContainer {
+    width: 35rem;
+
+    .itemOptBox {
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 2px solid black;
+      margin: 1rem 0 1.4rem;
+      align-items: center;
+      padding-bottom: 1rem;
+
+      button {
+        font-weight: 600;
+        @include widHeight(2rem, 2rem);
+        appearance: unset;
+        border: 0.7px solid $deepGreyColor;
+        margin: 0;
+        background-color: transparent;
+      }
+    }
+    .itemOptAll {
+      font-weight: 600;
+    }
+
+    .itemPickedSize {
+      font-weight: 800;
+    }
+
+    .itemOptBottom {
+      justify-content: flex-end;
+      align-items: center;
+      display: flex;
+      gap: 1rem;
+
+      .finalPriceWon {
+        font-weight: 800;
+        font-size: 1.6rem;
+        color: orangered;
+      }
+
+      .finalPriceKor {
+        font-weight: 400;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.orderBtns {
+  width: inherit;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+
+  .addCartBtn {
+    background-color: white;
+    border: 1px solid $deepGreyColor;
+    padding: 1rem;
+    width: 17.5rem;
+  }
+
+  .buyNowBtn {
+    width: 17.5rem;
+    color: white;
+    background-color: black;
+    border: $borderThinBlack;
+    padding: 1rem;
+    -webkit-box-shadow: 9px 12px 18px -1px rgba(0, 0, 0, 0.35);
+    box-shadow: 9px 12px 18px -1px rgba(0, 0, 0, 0.35);
+
+    &:hover {
+      background-color: orangered;
+      border: 1px solid orangered;
+    }
+  }
+}
+
+.details {
+  @include widHeight(62rem, auto);
+
+  .detailsInfo {
+    @include widHeight(inherit, auto);
+  }
+
+  .detailsInfo2 {
+    @include widHeight(inherit, auto);
+  }
+}
+
+.reviewContainer {
+  @include widHeight(62rem, none);
+  margin-bottom: 10rem;
+  margin-top: 2rem;
+
+  .reviewInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4rem;
+    @include widHeight(62rem, 2.2rem);
+
+    .reviewCount {
+      @include fontSet(1.5rem, 600);
+    }
+
+    .start {
+      width: 1rem;
+    }
+
+    .reviewRule {
+      padding: 0.3rem 0.4rem;
+      @include fontSet(0.8rem, 300);
+      border: 2px solid $greyColor;
+      @include widHeight(10rem, 20rem);
+    }
+
+    .divide {
+      margin: 1rem;
+      display: inline;
+      border-right: $borderThinBlack;
+    }
+
+    .writeReview {
+      @include fontSet(0.8rem, 300);
+      border-bottom: $borderThinBlack;
+
+      .linkSet {
+        text-decoration: none;
+        color: $darkGreyColor;
+        font-weight: 400;
+      }
+    }
+  }
+}

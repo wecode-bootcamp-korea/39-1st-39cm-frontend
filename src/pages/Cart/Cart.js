@@ -4,6 +4,8 @@ import "../Cart/Cart.scss";
 import CartItem from "./CartItem";
 
 const Cart = () => {
+  const ipAddress = "13.124.197.217";
+
   const [cartItemList, setCartItemList] = useState();
   const setPaymentItem = () => {
     const paymentItem = cartItemList.filter((obj) => {
@@ -26,7 +28,7 @@ const Cart = () => {
     //   });
 
     //backend API fetch
-    fetch("http://10.58.52.241:3000/cart", {
+    fetch(`http://${ipAddress}:3000/cart`, {
       method: "GET",
       headers: {
         authorization: localStorage.getItem("TOKEN"),
@@ -102,7 +104,7 @@ const Cart = () => {
                 // deletedItem.splice(index, 1);
                 // setCartItemList(deletedItem);
                 //백앤드 연결시 아래코드로 대체
-                fetch("http://10.58.52.241:3000/cart", {
+                fetch(`http://${ipAddress}:3000/cart`, {
                   method: "DELETE",
                   headers: {
                     "Content-Type": "application/json;charset=utf-8",

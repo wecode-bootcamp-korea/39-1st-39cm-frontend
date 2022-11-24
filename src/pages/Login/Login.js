@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import "../Login/Login.scss";
 
 const Login = () => {
+  const ipAddress = "13.124.197.217";
+
   let navigate = useNavigate();
   let gotoBestList = (e) => {
     e.preventDefault();
     //로그인 정보 확인
     console.log(account);
-    fetch("http://10.58.52.241:3000/auth/login", {
+    fetch(`http://${ipAddress}:3000/auth/login`, {
       method: "post",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -19,7 +21,7 @@ const Login = () => {
       }),
     })
       .then((response) => {
-        if (response.ok === true) {
+        if (response.status === 200) {
           return response.json();
         }
         throw new Error("로그인 실패");
@@ -32,7 +34,7 @@ const Login = () => {
       .then((data) => {
         console.log(data);
         localStorage.setItem("TOKEN", data.token);
-        navigate("/BestProductList");
+        navigate("/");
       });
   };
   const [loginAlert, setLoginAlert] = useState("");

@@ -39,13 +39,17 @@ nav {
   display: fixed;
   position: relative;
   @include widHeight(100vw, auto);
-  z-index: 1;
+  z-index: 1000;
   font-family: $FontFace;
   @include fontSet(0.5rem, 800);
 
   .unsetLink {
     text-decoration: none;
     color: $darkGreyColor;
+    span {
+      font-size: 12px;
+      font-weight: 500;
+    }
   }
 
   .navContent {
@@ -73,6 +77,7 @@ nav {
 
   .navCategoriesWrap {
     @include flex(space-between, center);
+    position: relative;
     height: 5rem;
     padding: 0.5rem 4rem;
     border-bottom: 2px solid $greyColor;
@@ -86,8 +91,10 @@ nav {
       gap: 1rem;
       cursor: default;
 
-      li {
+      .navCategory {
+        text-decoration: none;
         font-size: 1.5rem;
+        color: #000;
         border: none;
         border-bottom: 0.25rem solid transparent;
 
@@ -98,8 +105,10 @@ nav {
     }
 
     .searchIcon {
+      position: absolute;
+      right: 0;
       width: 2rem;
-      margin-left: 57rem;
+      margin-right: 4rem;
     }
   }
 }
@@ -111,10 +120,11 @@ nav {
   flex-direction: column;
   position: absolute;
   top: 0;
-  @include widHeight(100vw, 67vh);
+  @include widHeight(100vw, 100vh);
   padding: 4rem;
+  padding-right: 2rem;
   background-color: rgba(255, 255, 255, 0.8);
-  z-index: 11;
+  z-index: 11000;
   animation: fadeOut 0.2s ease-in-out 0s normal forwards;
 
   .searchCloseBtn {
@@ -152,6 +162,15 @@ nav {
       }
 
       .topKeyword {
+        .linkStyle {
+          text-decoration: none;
+          color: $darkGreyColor;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
         li {
           padding: 1.4rem 0 0;
         }

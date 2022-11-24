@@ -1,0 +1,198 @@
+@import "../../styles/mixin.scss";
+.wrapPayment {
+  @include flex(auto, center);
+  margin: 100px 0 100px;
+  font-family: "Noto Sans KR", "Roboto", "Poppins", sans-serif;
+  flex-direction: column;
+
+  .orderStep {
+    display: flex;
+    padding: 70px 0 78px;
+
+    span {
+      color: rgb(228, 228, 228);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 20px;
+      &:nth-child(2) {
+        color: #000;
+      }
+      &::after {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 15px;
+        border-bottom: 2px solid rgb(228, 228, 228);
+        border-left: 2px solid rgb(228, 228, 228);
+        transform: rotate(-135deg);
+        content: "";
+        box-sizing: content-box;
+      }
+      &:last-child {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+  .wrapCenter {
+    @include flex(center, auto);
+    width: 100vw;
+
+    .paymentInfo {
+      width: 48%;
+      min-width: 320px;
+      margin-right: 30px;
+      .userInfo {
+        padding-top: 10px;
+        border-top: 3px solid #000;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 60px;
+        .userInput {
+          display: flex;
+          margin-bottom: 20px;
+          font-size: 14px;
+          font-weight: 400;
+
+          input {
+            width: 250px;
+            height: 40px;
+            margin: 10px 0 10px 30px;
+            border: 1px solid rgb(228, 228, 228);
+            &:disabled {
+              background-color: #fff;
+            }
+          }
+          .numInput {
+            width: 50px;
+            &:focus {
+              outline: none;
+            }
+            &:nth-child(3) {
+              margin-left: 0;
+            }
+            &:nth-child(5) {
+              margin-left: 0;
+            }
+          }
+          div {
+            width: 50px;
+            height: 50px;
+            color: grey;
+            text-align: center;
+            line-height: 60px;
+          }
+        }
+      }
+      .pointInfo {
+        margin-top: 30px;
+        border-top: 3px solid #000;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 60px;
+        .wrapPoint {
+          display: flex;
+          margin-bottom: 20px;
+          font-size: 14px;
+          font-weight: 400;
+          div {
+            margin-right: 150px;
+          }
+          span {
+            font-size: 16px;
+            font-weight: 600;
+          }
+          &:last-child {
+            div {
+              margin-right: 107px;
+            }
+          }
+        }
+      }
+    }
+    .wrapCartInfo {
+      @include flex(center, auto);
+      width: 40%;
+      min-width: 370px;
+      border: 4px solid #000;
+      .cartInfo {
+        width: 90%;
+        .rightHeader {
+          margin-top: 30px;
+          padding-bottom: 20px;
+          border-bottom: 3px solid #000;
+          font-size: 17px;
+          font-weight: 700;
+        }
+        .cartItems {
+          display: flex;
+          padding: 20px 0;
+          img {
+            width: 170px;
+            height: 170px;
+            margin-right: 20px;
+          }
+          .itemInfo {
+            display: flex;
+            flex-direction: column;
+            .brandLink {
+              padding-bottom: 8px;
+              color: #000;
+              font-size: 15px;
+              font-weight: 500;
+            }
+            .productLink {
+              color: #000;
+              font-size: 16px;
+              font-weight: 500;
+              text-decoration: none;
+            }
+            span {
+              padding-top: 15px;
+              color: grey;
+              font-size: 13px;
+            }
+            .price {
+              color: #000;
+            }
+          }
+          &:nth-last-child(3) {
+            border-bottom: 1px solid rgb(228, 228, 228);
+          }
+        }
+        .totalPrice {
+          position: relative;
+          display: flex;
+          padding: 30px 0;
+          border-bottom: 1px solid rgb(228, 228, 228);
+          font-size: 15px;
+          font-weight: 600;
+          line-height: 30px;
+          div {
+            position: absolute;
+            color: red;
+            font-size: 30px;
+            right: 0;
+            font-weight: 800;
+          }
+          span {
+            font-size: 17px;
+            font-weight: 500;
+          }
+        }
+        button {
+          width: 100%;
+          height: 60px;
+          margin-bottom: 30px;
+          color: #fff;
+          border: none;
+          font-size: 22px;
+          background-color: #000;
+          font-weight: 600;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
