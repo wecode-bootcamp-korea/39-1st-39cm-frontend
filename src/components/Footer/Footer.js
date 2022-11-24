@@ -88,14 +88,14 @@ const PROFILE_LIST = [
 ];
 
 const ACCOUNT_LINK_LIST = [
-  {
-    pageName: "LOGIN",
-    link: "/Login",
-  },
-  {
-    pageName: "SIGNUP",
-    link: "/Signup",
-  },
+  // {
+  //   pageName: "LOGIN",
+  //   link: "/Login",
+  // },
+  // {
+  //   pageName: "SIGNUP",
+  //   link: "/Signup",
+  // },
   {
     pageName: "MY PAGE",
     link: "/MyPage",
@@ -109,14 +109,14 @@ const ACCOUNT_LINK_LIST = [
 const SHOPPING_LIST = [
   {
     pageName: "BEST",
-    link: "/BestProductList/products?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=2",
+    link: "/BestProductList?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=2",
   },
   {
     pageName: "WOMEN",
-    link: "/BestProductList/products?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=2",
+    link: "/BestProductList?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=2",
   },
   {
     pageName: "MEN",
-    link: "/BestProductList/products?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=1",
+    link: "/BestProductList?limit=&offset=&sort=&color=&min_price=&max_price=&category=&brand=&product_gender=1",
   },
 ];

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 function BestProductBottom(props) {
   const {
     productId,
@@ -31,7 +31,7 @@ function BestProductBottom(props) {
         console.log(result.isLiked);
         setIsLiked(result.isLiked);
       });
-  }, [gender, category, sort]);
+  }, [gender, category, sort, productId]);
   return (
     <li key={props.index} className="product">
       <div className="ware">
