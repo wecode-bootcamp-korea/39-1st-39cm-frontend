@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../Product/BestProductTop.scss";
 function BestProductTop(props) {
   const {
@@ -33,7 +33,7 @@ function BestProductTop(props) {
         console.log(result.isLiked);
         setIsLiked(result.isLiked);
       });
-  }, [gender, category, sort, isLiked]);
+  }, [gender, category, sort, isLiked, productId]);
   return (
     <li key={props.index} className="product">
       <div className="ware">

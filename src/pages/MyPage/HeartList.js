@@ -12,7 +12,7 @@ function HeartList({ productId }) {
       .then((result) => {
         setProductInfo(result.product[0]);
       });
-  }, []);
+  }, [productId]);
 
   return (
     <ul className="likeLists">

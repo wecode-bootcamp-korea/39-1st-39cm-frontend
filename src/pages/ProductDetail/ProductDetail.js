@@ -95,7 +95,7 @@ const ProductDetail = () => {
         console.log(result.isLiked);
         setLikePd(result.isLiked);
       });
-  }, []);
+  }, [productId]);
 
   const onIncrease = () => {
     setNumber((prevNum) => prevNum + 1);
