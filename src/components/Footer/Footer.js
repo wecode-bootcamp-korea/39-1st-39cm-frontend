@@ -19,11 +19,25 @@ const Footer = () => {
         <div className="linkList">
           <div>ACCOUNT</div>
           {ACCOUNT_LINK_LIST.map((obj, index) => {
-            return (
-              <Link key={index} className="link" to={obj.link}>
-                {obj.pageName}
-              </Link>
-            );
+            if (localStorage.getItem("TOKEN")) {
+              return (
+                <Link key={index} className="link" to={obj.link}>
+                  {obj.pageName}
+                </Link>
+              );
+            } else {
+              return (
+                <button
+                  key={index}
+                  className="link"
+                  onClick={() => {
+                    alert("로그인이 필요한 서비스 입니다.");
+                  }}
+                >
+                  {obj.pageName}
+                </button>
+              );
+            }
           })}
         </div>
       </div>
