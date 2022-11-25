@@ -349,6 +349,10 @@ li {
     margin-left: -20px;
   }
 }
+.orderList {
+  display: flex;
+  flex-direction: column;
+}
 
 .itemInfo {
   position: relative;

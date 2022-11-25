@@ -132,10 +132,10 @@ const CartItem = ({
       <div className="itemInfo">
         <img src={images} alt="product_img" />
         <div className="wrapItemInfo">
-          <Link className="brandLink" to={`/ProdectDetail/${productId}`}>
+          <Link className="brandLink" to={`/ProductDetail/${productId}`}>
             {brand_name}
           </Link>
-          <Link className="itemLink" to={`/ProdectDetail/${productId}`}>
+          <Link className="itemLink" to={`/ProductDetail/${productId}`}>
             {productName}
           </Link>
           <div className="singlePrice">{productPrice.toLocaleString()}원</div>
