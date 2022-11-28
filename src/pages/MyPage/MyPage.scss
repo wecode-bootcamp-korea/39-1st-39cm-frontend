@@ -414,8 +414,11 @@ li {
     font-weight: 600;
   }
 }
-
+// .heartList {
+//   display: flex;
+// }
 .likeLists {
+  // width: 100px;
   display: flex;
   flex-wrap: wrap;
   margin-left: -20px;
@@ -435,7 +438,7 @@ li {
   }
 
   .imgBox {
-    overflow: hidden;
+    // overflow: hidden;
     position: relative;
     width: 100%;
   }
@@ -450,7 +453,13 @@ li {
     justify-content: center;
 
     img {
-      width: 100%;
+      width: 200px;
+      height: 200px;
+      max-width: 200px;
+      max-height: 200px;
+      min-width: 200px;
+      min-height: 200px;
+      margin-left: 43px;
     }
   }
 
