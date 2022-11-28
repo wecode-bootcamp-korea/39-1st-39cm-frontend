@@ -18,7 +18,7 @@ function HeartList({ productId }) {
     <ul className="likeLists">
       {productInfo && (
         <li className="likeListInfo">
-          <Link to={`/ProductDetail/${productId}`} className="product">
+          <Link to={`/ProductDetail/${productId}`} className="productLike">
             <div className="imgBox">
               <div className="imgIn">
                 <img src={productInfo.images[0]} alt="product" />

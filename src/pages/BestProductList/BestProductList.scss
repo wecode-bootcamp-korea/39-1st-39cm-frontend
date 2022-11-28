@@ -117,20 +117,22 @@ button {
 .categoriesList {
   display: flex;
   flex-wrap: wrap;
-}
-
-.list {
-  min-width: 20px;
-  line-height: 20px;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  position: relative;
-  overflow: visible;
-  height: 46px;
-  margin-left: 50px;
+  .list {
+    min-width: 20px;
+    line-height: 20px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+    height: 46px;
+    margin-left: 50px;
+    .kind {
+      appearance: none;
+    }
+  }
 }
 
 .kind {

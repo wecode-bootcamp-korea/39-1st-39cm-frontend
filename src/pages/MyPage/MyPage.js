@@ -109,7 +109,7 @@ const MyPage = () => {
                 <h3 className="myTit">MY HEART</h3>
                 <div className="heartWrap">
                   <h4 className="heartTit">Products</h4>
-                  <div className="orderList">
+                  <div className="heartList">
                     {myPageList &&
                       myPageList.liked &&
                       myPageList.liked.map((id, index) => {

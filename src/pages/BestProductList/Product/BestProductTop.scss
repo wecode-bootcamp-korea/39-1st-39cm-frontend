@@ -28,6 +28,13 @@
   pointer-events: none;
   color: white;
   font-weight: 400;
+  &::before {
+    width: 62px;
+    height: 62px;
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 62px;
+  }
 }
 
 .ware {
